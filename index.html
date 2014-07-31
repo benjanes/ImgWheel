@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+	ImgWheel: A jQuery Plugin
+</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+<script src="jquery.ImgWheel.min.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+<script src="ImgWheel_site/main.min.js"></script>
+<script>
+	$(document).ready( function() {
+		$('#overview-example').ImgWheel({articleWidth: '40%', articleAlignment: 'right'});
+		$('#example1').ImgWheel();
+		$('#example2').ImgWheel({displayWidth: '50%'});
+		$('#example3').ImgWheel({displayWidth: '400px'});
+		$('#example4').ImgWheel({animateSpeed: 1000, delay: 2000});
+		$('#example5').ImgWheel({imgPlacement: 'bottom'});
+		$('#example6').ImgWheel({direction: 'reverse'});
+		$('#example7').ImgWheel({functionality: 'click'});
+		$('#example8').ImgWheel();
+		$('#example9').ImgWheel();
+		$('#example10').ImgWheel({articleWidth: '60%', articleAlignment: 'right'});
+		$('#example11').ImgWheel({articleWidth: '60%', articleAlignment: 'left'});
+	});
+</script>
+<link rel="stylesheet" href="ImgWheel_site/style.css"></link>
+</head>
+
+<body>
+<div id="top-banner">
+	<span class="page-title"><h1><code>ImgWheel</code></h1></span>
+	<div class="main-cats">
+		<span class="main-cat" id="overview-heading">overview</span>
+		<span class="main-cat" id="settings-heading">settings</span>
+		<span class="main-cat" id="demos-heading">demos</span>
+		<span class="main-cat"><a href="https://github.com/benjanes/ImgWheel">download</a></span>
+	</div>
+</div>
+<div id="left-side"></div>
+<div id="right-side"></div>
+<div id="overview">
+	<div class="category">
+		<h1 class="cat-heading">overview</h1>
+		<h3 class="cat-title">WHAT IT IS<span class="arrow-lrg-top"></span></h3>
+		<div class="example">
+			<h3 class="example-title">The Essentials<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info"></div>
+				<div class="demonstration">
+					<div id="overview-example">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/responsive.png" alt="responsive"/>
+							<img src="ImgWheel_site/images/center.png" alt="center focused"/>
+							<img src="ImgWheel_site/images/adjustable.png" alt="adjustable"/>
+							<img src="ImgWheel_site/images/endless.png" alt="endless"/>
+							<img src="ImgWheel_site/images/extensible.png" alt="extensible"/>
+						</div>
+						<div class="article-container">
+							<article>
+								<h2><code>ImgWheel</code> is... Responsive</h2>
+								<p><code>ImgWheel</code> has a responsive display. Images and the slideshow container are resized on window resize events. Unlike with a lot of image slider plugins, images included in the <code>ImgWheel</code> slideshow always retain their original aspect ratio within the display.</p>
+							</article>
+							<article>
+								<h2><code>ImgWheel</code> is... Center Focused</h2>
+								<p>The center image in the <code>ImgWheel</code> slideshow has some special properties. If additional content is included in the display, the content linked to each slideshow image will be displayed when that image is central. If slideshow images are wrapped in anchor tags (<code>&#60;a&#62;</code>), the associated links will only be active when an image is in the center position in the slideshow.</p>
+							</article>
+							<article>
+								<h2><code>ImgWheel</code> is... Adjustable</h2>
+								<p>There are a number of built-in options and CSS classes that you can alter when using <code>ImgWheel</code>, including the event that triggers the animation (click, hover, or touch), the display width, and the animation speed.</p>
+							</article>
+							<article>
+								<h2><code>ImgWheel</code> is... Endless</h2>
+								<p>At least 5 images need to be included in a slideshow for <code>ImgWheel</code> to function properly. Include as many images beyond 5 as you like... they will get looped through endlessly.</p>
+							</article>
+							<article>
+								<h2><code>ImgWheel</code> is... Extensible</h2>
+								<p>You have the option to include content related to the slideshow images that becomes a part of the slideshow. This content could be something like an image caption or title, an article or blog entry, or whatever you might want. The content related to the central image will be displayed.</p>
+							</article>
+						</div>
+						<div id="overview-left">
+							<h2>What is <code>ImgWheel</code>?</h2>
+							<p><code>ImgWheel</code> is an animated, endless, responsive slideshow that has the capability to display content related to your slideshow images as they appear. It has several options for how images are scrolled through, direction, speed, vertical alignment of images, and placement of the related content. Hover over either side of the display above to learn more about what <code>ImgWheel</code> is...
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="category">
+		<h3 class="cat-title">HOW TO USE IT<span class="arrow-lrg-top"></span></h3>
+		<div class="example">
+			<h3 class="example-title">The HTML<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info"></div>
+				<div class="demonstration">
+					<p>The first step in including <code>ImgWheel</code> on your site is to set up the HTML for your slideshow. All of the HTML for <code>ImgWheel</code> should go inside of a &#60;div&#62; with an assigned id or class. Within this &#60;div&#62; is placed a &#60;div&#62; with class="image-container". In this &#60;div&#62; go your images. The HTML for a basic slideshow would look like this:</p>
+					<pre class="prettyprint">
+&#60;div id="my-slideshow"&#62;
+  &#60;div class="image-container"&#62;
+	&#60;img src="yourImage_1.jpg" /&#62;
+	&#60;img src="yourImage_2.jpg" /&#62;
+	&#60;img src="yourImage_3.jpg" /&#62;
+	&#60;img src="yourImage_4.jpg" /&#62;
+	&#60;img src="yourImage_5.jpg" /&#62;
+	&#60;img src="yourImage_6.jpg" /&#62;
+	&#60;img src="yourImage_7.jpg" /&#62;
+	&#60;!--Include as many images as you'd like!--&#62;
+  &#60;/div&#62;
+&#60;/div&#62;</pre>
+					<p>If you want to include additional content to be displayed as part of the <code>ImgWheel</code> slideshow, now is your chance. Simply add in another &#60;div&#62; with the class="article-container". Within this &#60;div&#62;, place as many &#60;article&#62;'s as there are images in your .image-container &#60;div&#62;, then fill those &#60;article&#62;'s with whatever content you like. When the first image in your .image-container &#60;div&#62; is central in the slideshow, the first article in your .article-container &#60;div&#62; will be displayed, and so on. The HTML looks like this:</p>
+					<pre class="prettyprint">
+&#60;div id="my-slideshow"&#62;
+  &#60;div class="image-container"&#62;
+	&#60;img src="Image_1.jpg" /&#62;
+	&#60;img src="Image_2.jpg" /&#62;
+	&#60;img src="Image_3.jpg" /&#62;
+	&#60;img src="Image_4.jpg" /&#62;
+	&#60;img src="Image_5.jpg" /&#62;
+	&#60;!--Include as many images as you'd like!--&#62;
+  &#60;/div&#62;
+  &#60;div class="article-container"&#62;
+	&#60;article&#62;&#60;!--Content displayed when Image_1.jpg is central--&#62;&#60;/article&#62;
+	&#60;article&#62;&#60;!--Content displayed when Image_2.jpg is central--&#62;&#60;/article&#62;
+	&#60;article&#62;&#60;!--Content displayed when Image_3.jpg is central--&#62;&#60;/article&#62;
+	&#60;article&#62;&#60;!--Content displayed when Image_4.jpg is central--&#62;&#60;/article&#62;
+	&#60;article&#62;&#60;!--Content displayed when Image_5.jpg is central--&#62;&#60;/article&#62;
+	&#60;!--Include as many articles as there are images in the .image-container--&#62;
+  &#60;/div&#62;
+&#60;/div&#62;</pre>
+					<p>Static content can also be included within the <code>ImgWheel</code> display. To have static content displayed alongside your rotating articles, add in another &#60;div&#62; containing this content:
+<pre class="prettyprint">
+&#60;div id="my-slideshow"&#62;
+  &#60;div class="image-container"&#62;
+	&#60;img src="Image_1.jpg" /&#62;
+	&#60;img src="Image_2.jpg" /&#62;
+	&#60;img src="Image_3.jpg" /&#62;
+	&#60;img src="Image_4.jpg" /&#62;
+	&#60;img src="Image_5.jpg" /&#62;
+	&#60;!--Include as many images as you'd like!--&#62;
+  &#60;/div&#62;
+  &#60;div class="article-container"&#62;
+	&#60;article&#62;&#60;!--Content displayed when Image_1.jpg is central--&#62;&#60;/article&#62;
+	&#60;article&#62;&#60;!--Content displayed when Image_2.jpg is central--&#62;&#60;/article&#62;
+	&#60;article&#62;&#60;!--Content displayed when Image_3.jpg is central--&#62;&#60;/article&#62;
+	&#60;article&#62;&#60;!--Content displayed when Image_4.jpg is central--&#62;&#60;/article&#62;
+	&#60;article&#62;&#60;!--Content displayed when Image_5.jpg is central--&#62;&#60;/article&#62;
+	&#60;!--Include as many articles as there are images in the .image-container--&#62;
+  &#60;/div&#62;
+  &#60;div class="static-content"&#62;&#60;!--Identify this div however you'd like--&#62;
+	&#60;!--Insert whatever static content you'd like displayed--&#62;
+  &#60;/div&#62;
+&#60;/div&#62;</pre>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h3 class="example-title">The JavaScript<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info"></div>
+				<div class="demonstration">
+					<p>You need to download and save the jquery.ImgWheel.min.js file in your project or site directory. To use <code>ImgWheel</code>, link to this file in your HTML &#60;head&#62;. If you haven't done so already, also link to a version of jQuery (version 1.6 or later). You can link to jQuery via Google without downloading the library into your project directory:</p>
+<pre class="prettyprint">
+&#60;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"&#62;&#60;/script&#62;
+&#60;script src="jquery.ImgWheel.min.js"&#62;&#60;/script&#62;</pre>
+					<p>With the jQuery library and <code>ImgWheel</code> loaded on your page, you can now access the <code>ImgWheel()</code> function for use on page elements. Using the HTML in the previous example, we can apply the function to a div on our page like so:</p>
+<pre class="prettyprint">
+$('#my-slideshow').ImgWheel();</pre>
+					<p>This would be included either in your page's main JavaScript file or right in your site's &#60;head&#62; tags. Options to be included when invoking the function are discussed in the Settings section!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="settings">
+	<div class="category">
+		<h1 class="cat-heading">settings</h1>
+		<h3 class="cat-title">OPTIONS<span class="arrow-lrg-top"></span></h3>
+		<div class="example">
+			<h3 class="example-title">Settings<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info"></div>
+				<div class="demonstration">
+					<p>To see what the various settings look like when manipulated, check out the Demos section.</p>
+					<table>
+						<tr>
+							<th>Setting</th>
+							<th>Default</th>
+							<th>Options</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td><code>displayWidth</code></td>
+							<td><code>'100%'</code></td>
+							<td>Any display width can be used.</td>
+							<td>This is the width of the entire <code>ImgWheel</code> display, which includes the slideshow and any other related content below the slideshow but within the targeted &#60;div&#62;. Relative sizing allows for responsiveness, whereas switching to a fixed width (in px) will negate this functionality.</td>
+						</tr>
+						<tr>
+							<td><code>animateSpeed</code></td>
+							<td><code>500</code></td>
+							<td>Any animation speed can be specified.</td>
+							<td>The speed (length of time) of the animated transition from one image to the next. Speed is in milliseconds.</td>
+						</tr>
+						<tr>
+							<td><code>delay</code></td>
+							<td><code>1000</code></td>
+							<td>Any animation delay time can be specified.</td>
+							<td>The duration that each image (and the related content) is displayed while the ImgWheel is in motion, i.e. being hovered over. If the 'click' functionality is enabled (see below), this setting is irrelevant.</td>
+						</tr>
+						<tr>
+							<td><code>imgPlacement</code></td>
+							<td><code>'center'</code></td>
+							<td><code>'center'</code>, <code>'top'</code>, or <code>'bottom'</code></td>
+							<td>The vertical alignment of the images included in the slideshow display.</td>
+						</tr>
+						<tr>
+							<td><code>direction</code></td>
+							<td><code>''</code></td>
+							<td><code>''</code> or <code>'reverse'</code></td>
+							<td>Controls the direction that the images will animate in. By default, images move to the right when hovering or clicking on the left side of the display. Using <code>'reverse'</code> will cause images to move to the left when hovering or clicking on the left side of the display.</td>
+						</tr>
+						<tr>
+							<td><code>functionality</code></td>
+							<td><code>''</code></td>
+							<td><code>''</code> or <code>'click'</code></td>
+							<td>The slideshow animation is triggered by hover or touch (when available) by default. Switching to <code>'click'</code> causes directional arrows to appear when hovering over the display... clicking these arrows triggers one step of the slideshow scrolling.</td>
+						</tr>
+						<tr>
+							<td><code>articleWidth</code></td>
+							<td><code>'100%'</code></td>
+							<td>Any article width can be specified.</td>
+							<td>This is the width of associated article display. It is set relative to the <code>displayWidth</code>. For example, if <code>displayWidth</code> is set to 70% and <code>articleWidth</code> is set to 50%, the article width will be 50% of the display width and 35% of the parent container width. This width is responsive. Again, specifying a fixed width negates this responsiveness.</td>
+						</tr>
+						<tr>
+							<td><code>articleAlignment</code></td>
+							<td><code>'center'</code></td>
+							<td><code>'center'</code>, <code>'left'</code>, or <code>'right'</code></td>
+							<td>The articles in the <code>.article-container</code> &#60;div&#62; are centered by default, regardless of their specified width. They can also be aligned to the left or right of the container.</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="category">
+		<h3 class="cat-title">CSS STYLING<span class="arrow-lrg-top"></span></h3>
+		<div class="example">
+			<h3 class="example-title">The Built-in Classes<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info"></div>
+				<div class="demonstration">
+					<p><code>ImgWheel</code> comes with two built in CSS classes. These two classes are added and removed as part of the scrolling function. They allow you to manipulate how the central image and the other images in the slideshow look.</p>
+					<h3><code>.onlyCentral</code></h3>
+					<p>The <code>.onlyCentral</code> class is applied to the central image in the slideshow display. You might want to add a border or filter to this center image. Style away in your CSS!</p>
+					<h3><code>.everythingBut</code></h3>
+					<p>The <code>.everythingBut</code> class is applied to every image in the slideshow display <i>except for</i> the central image. Maybe you want these other images to be blurred, have limited opacity, or be in black and white. Apply whatever style you want to this class in your CSS file.</p>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h3 class="example-title">Add Your Own!<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info"></div>
+				<div class="demonstration">
+					<p>Of course, you can add in any CSS styling you want on your own. The only classes that you need to apply yourself in the HTML are to the <code>.image-container</code> and the optional <code>.article-container</code> &#60;div&#62;'s. The only style specifications you will want to steer clear of are altering the dimensions of the display and the alignment of the articles (use the <code>ImgWheel</code> settings to do this!).</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="demos">
+	<div class="category">
+		<h1 class="cat-heading">demos</h1>
+		<h3 class="cat-title">THE BASICS<span class="arrow-lrg-top"></span></h3>
+		<div class="example">
+			<h3 class="example-title">ImgWheel Default Settings<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info bg-color">
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+							<p>This is the ImgWheel plugin in it's most basic implementation. Scrolling is 	controlled by hovering 	over either side of the image display. The width of the display is set to 100% by default. The 	display and image sizes are responsive. If images included in the <code>.image-container</code> div are enclosed in an anchor tag, that link will only be active when an image is in the central position.</p>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example JavaScript Code<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+$('#my-slideshow').ImgWheel();</pre>
+						</div>
+					</div>
+				</div>
+				<div class="demonstration">
+					<div id="example1">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h3 class="example-title">Setting the Display Size<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info bg-color">
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+							<p>When relative widths are used to size an ImgWheel container (i.e. width 	specified as a percent) the size of the images will change responsively when the browser window is resized. If a fixed width is used, this responsiveness is lost. The first container's <code>displayWidth</code> setting is set to '50%', while the second container's <code>displayWidth</code> is set to '400px'. Resize your browser window to see the difference.</p>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example JavaScript Code<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+$('#my-slideshow_1').ImgWheel({displayWidth: '50%'});
+$('#my-slideshow_2').ImgWheel({displayWidth: '400px'});</pre>
+						</div>
+					</div>
+				</div>
+				<div class="demonstration">
+					<div id="example2">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+					</div>
+					<br />
+					<div id="example3">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h3 class="example-title">Scroll Animation Speed Settings<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info bg-color">
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+							<p>The speed of the scrolling animation and the delay before the next animation takes place (while 	the user is hovering) can be controlled via the <code>	animateSpeed</code> and <code>delay</code> settings, respectively. These are set to 500 and 1000 milliseconds by default. Here the <code>animateSpeed</code> setting has been changed to 1000 ms and the <code>delay</code> setting has been changed to 2000 ms.</p>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example JavaScript Code<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+$('my-slideshow').ImgWheel({animateSpeed: 1000, delay: 2000});</pre>
+						</div>
+					</div>
+				</div>
+				<div class="demonstration">
+					<div id="example4">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h3 class="example-title">Vertical Alignment of Images<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info bg-color">
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+							<p>The images in the scroll are vertically centered by default. This can be changed with the <code>imgPlacement</code> setting. Alternative options are 'top' or 'bottom'.</p>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example JavaScript Code<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+$('my-slideshow').ImgWheel({imgPlacement: 'bottom'});</pre>
+						</div>
+					</div>
+				</div>
+				<div class="demonstration">
+					<div id="example5">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h3 class="example-title">Direction of Scrolling<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info bg-color">
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+							<p>When hovering on the left side of the display, the images will scroll to the right by default. This direction can be changed by setting <code>direction</code> to 'reverse'.</p>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example JavaScript Code<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+$('my-slideshow').ImgWheel({direction: 'reverse'});</pre>
+						</div>
+					</div>
+				</div>
+				<div class="demonstration">
+					<div id="example6">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h3 class="example-title">Changing the Animation Trigger<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info bg-color">
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+							<p>There are two options for triggering the scrolling. The default is hovering 	on either side of the container (or touching either side of the container if touch is enabled on the user's device). The trigger can be changed to clicking by setting <code>functionality</code> to 'click'. When this setting is changed, hovering over the display shows directional arrows to either side. Clicking an 	arrow will cause the scroll to occur in the direction indicated. Again, the direction of this scroll is controlled with <code>direction</code>.</p>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example JavaScript Code<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+$('my-slideshow').ImgWheel({functionality: 'click'});</pre>
+						</div>
+					</div>
+				</div>
+				<div class="demonstration">
+					<div id="example7">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="category">
+		<h3 class="cat-title">APPLY SOME STYLE<span class="arrow-lrg-top"></span></h3>
+		<div class="example">
+			<h3 class="example-title">Using the ImgWheel CSS Classes<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info bg-color">
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+							<p>The images in the scrolling display can be styled with CSS just as you would any other image. But what if you want your central image to display differently from other images in the container? This can be controlled by styling the <code>.everythingBut</code> and <code>.onlyCentral</code> classes in your CSS file. As the names imply, the <code>.everythingBut</code> class is applied to any image in the scroll that is not currently the central image. The <code>.onlyCentral</code> class is applied only to the central image in the display. For instance, here the <code>.everythingBut</code> class is styled to have reduced opacity and the invert filter applied. The <code>.onlyCentral</code> class is styled to include a 1px, black border. If you want to include different styling for these classes for multiple instances of <code>ImgWheel</code> on one page, use the appropriate CSS selection techniques.</p>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example JavaScript Code<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+$('my-slideshow').ImgWheel();</pre>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example CSS Code<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+.onlyCentral {
+  border: 1px solid black;
+}
+.everythingBut {
+  opacity: .6;
+  filter: invert(100%);
+}</pre>
+						</div>
+					</div>
+				</div>
+				<div class="demonstration">
+					<div id="example8">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="category">
+		<h3 class="cat-title">GET OTHER CONTENT IN THERE<span class="arrow-lrg-top"></span></h3>
+		<div class="example">
+			<h3 class="example-title">Display Related Content<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info bg-color">
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+							<p>While the ImgWheel Plugin image scrolling is responsive and handy, what makes ImgWheel a little different from a lot of other carousel plugins is the ability to include a rotation of related content below the image display. Content related to an image will be displayed when that image is central in the container. This content could be as simple as a photo caption or as complicated as you like. Or you could leave this part out altogether. Up to you.</p>
+							<p>If you want to display related content, here's how it works. Make a second div within the tags that ImgWheel is targeting, and give it the class <code>"article-container"</code>. Place as many <code>&#60;article&#62;</code>'s in this div as there are images in your <code>.image-container</code> div. Then add whatever content you want to each article. You can go style-crazy on the related content in your CSS file. Here it is with the default settings:</p>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example JavaScript Code<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+$('my-slideshow').ImgWheel();</pre>
+						</div>
+					</div>
+				</div>
+				<div class="demonstration">
+					<div id="example9">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+						<div class="article-container">
+							<article>
+								<h4>Blue Sun</h4>
+								<p>This is an indelible hand crack at Indian Creek. Make your way out to the Way Rambo Wall to check it out if you have the chance!</p>
+							</article>
+		
+							<article>
+								<h4>Cave Route</h4>
+								<p>A harder-than-it-looks dihedral climb at Battle of the Bulge Buttress. Perfect for when the rain (or the sun) is pounding down.</p>
+							</article>
+							
+							<article>
+								<h4>The Fracture</h4>
+								<p>A short, perfectly fractured finger crack at Sugarloaf, above Kyburz, CA. The crux is distinct and slippery!</p>
+							</article>
+
+							<article>
+								<h4>On the Lamb</h4>
+								<p>A unique horizontal route in the beautiful setting of Tuolumne. On Lamb Dome.</p>
+							</article>
+
+							<article>
+								<h4>Matthes Crest</h4>
+								<p>Perfect knife-edge ridge traversing that seems to go on and on, yet still leaves you wanting more. Great views of the Tuolumne backcountry.</p>
+							</article>
+
+							<article>
+								<h4>Third Pillar of Dana</h4>
+								<p>Beautiful granite pillar perched just to the east of the Sierra Crest, above Mono Lake in California. Fun climbing with an unforgettable last pitch.</p>
+							</article>
+
+							<article>
+								<h4>Scarface</h4>
+								<p>Perhaps the most picturesque of Indian Creek routes? The climbing isn't bad, either...</p>
+							</article>
+
+							<article>
+								<h4>Traveler Buttress</h4>
+								<p>One of the two "50 Classic" climbs located at Lover's Leap, in the vicinity of South Lake Tahoe, CA.</p>
+							</article>
+		
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h3 class="example-title">Size and Position the Related Content<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info bg-color">
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+							<p>The related content can be styled any way you like in your CSS file. To control the horizontal alignment and the width of this display, however, use the ImgWheel <code>articleAlignment</code> and <code>articleWidth</code> settings. This will ensure that the positioning of the related content, its width and height, and the height of the entire ImgWheel display will all be responsively resized on window resizing events. The <code>articleAlignment</code> setting has three options, 'center', 'left', or 'right', and is set to 'center' by default. This is the horizontal alignment with respect to the ImgWheel container. The <code>articleWidth</code> setting is 100% of the ImgWheel display by default. To keep the width responsive, the <code>articleWidth</code> should only be set using a percentage measure. Here the article container has its width set to 60% and its alignment set to the right.</p>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example JavaScript Code<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+$('my-slideshow').ImgWheel({articleWidth: '60%', articleAlignment: 'right'});</pre>
+						</div>
+					</div>
+				</div>
+				<div class="demonstration">
+					<div id="example10">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+						<div class="article-container">
+							<article>
+								<h4>Blue Sun</h4>
+								<p>This is an indelible hand crack at Indian Creek. Make your way out to the Way Rambo Wall to check it out if you have the chance!</p>
+							</article>
+							<article>
+								<h4>Cave Route</h4>
+								<p>A harder-than-it-looks dihedral climb at Battle of the Bulge Buttress. Perfect for when the rain (or the sun) is pounding down.</p>
+							</article>					
+							<article>
+								<h4>The Fracture</h4>
+								<p>A short, perfectly fractured finger crack at Sugarloaf, above Kyburz, CA. The crux is distinct and slippery!</p>
+							</article>
+							<article>
+								<h4>On the Lamb</h4>
+								<p>A unique horizontal route in the beautiful setting of Tuolumne. On Lamb Dome.</p>
+							</article>
+							<article>
+								<h4>Matthes Crest</h4>
+								<p>Perfect knife-edge ridge traversing that seems to go on and on, yet still leaves you wanting more. Great views of the Tuolumne backcountry.</p>
+							</article>
+							<article>
+								<h4>Third Pillar of Dana</h4>
+								<p>Beautiful granite pillar perched just to the east of the Sierra Crest, above Mono Lake in California. Fun climbing with an unforgettable last pitch.</p>
+							</article>
+							<article>
+								<h4>Scarface</h4>
+								<p>Perhaps the most picturesque of Indian Creek routes? The climbing isn't bad, either...</p>
+							</article>
+							<article>
+								<h4>Traveler Buttress</h4>
+								<p>One of the two "50 Classic" climbs located at Lover's Leap, in the vicinity of South Lake Tahoe, CA.</p>
+							</article>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h3 class="example-title">Include Static Content in the Display<span class="arrow-lrg"></span></h3>
+			<div class="example-content">
+			<hr />
+				<div class="example-info bg-color">
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+							<p>What if you want to include some kind of static sidebar or display description in your ImgWheel display alongside of the dynamically-displayed related content? Go for it! The ImgWheel plugin is set-up to size its display based not only on <code>&#60;article&#62;</code>'s included in the <code>.article-container</code> div, but also on the heights of any other div's included in the div targeted by ImgWheel. These div's would be placed in the targeted div. Vertical placement is automatically set for display below the image container, even with the related content display. Width and horizontal alignment can be set in your CSS file. Here the static content has been placed in a div with id of "static-content". The div is set to 35% width and is placed on the right. The articles are aligned to the left with width 60%.</p>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example JavaScript<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+$('my-slideshow').ImgWheel({articleWidth: '60%', articleAlignment: 'left'});</pre>
+						</div>
+					</div>
+					<div class="example-info-group">
+						<div class="example-info-group-heading">Example CSS<span class="arrow-med"></span></div>
+						<div class="example-info-group-expanded">
+<pre class="prettyprint">
+#static-content {
+  position: absolute;
+  width: 35%;
+  right: 0px;
+  border: 1px solid black;
+  margin-top: 15px;
+}</pre>
+						</div>
+					</div>
+				</div>
+				<div class="demonstration">
+					<div id="example11">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+						<div class="article-container">
+							<article>
+								<h4>Blue Sun</h4>
+								<p>This is an indelible hand crack at Indian Creek. Make your way out to the Way Rambo Wall to check it out if you have the chance!</p>
+							</article>
+							<article>
+								<h4>Cave Route</h4>
+								<p>A harder-than-it-looks dihedral climb at Battle of the Bulge Buttress. Perfect for when the rain (or the sun) is pounding down.</p>
+							</article>				
+							<article>
+								<h4>The Fracture</h4>
+								<p>A short, perfectly fractured finger crack at Sugarloaf, above Kyburz, CA. The crux is distinct and slippery!</p>
+							</article>
+							<article>
+								<h4>On the Lamb</h4>
+								<p>A unique horizontal route in the beautiful setting of Tuolumne. On Lamb Dome.</p>
+							</article>
+							<article>
+								<h4>Matthes Crest</h4>
+								<p>Perfect knife-edge ridge traversing that seems to go on and on, yet still leaves you wanting more. Great views of the Tuolumne backcountry.</p>
+							</article>
+							<article>
+								<h4>Third Pillar of Dana</h4>
+								<p>Beautiful granite pillar perched just to the east of the Sierra Crest, above Mono Lake in California. Fun climbing with an unforgettable last pitch.</p>
+							</article>
+							<article>
+								<h4>Scarface</h4>
+								<p>Perhaps the most picturesque of Indian Creek routes? The climbing isn't bad, either...</p>
+							</article>
+							<article>
+								<h4>Traveler Buttress</h4>
+								<p>One of the two "50 Classic" climbs located at Lover's Leap, in the vicinity of South Lake Tahoe, CA.</p>
+							</article>
+						</div>
+						<div id="static-content">
+							<h5 id="disclaimer">DISCLAIMER</h5>
+							<p>Rock climbing is dangerous. <code>ImgWheel</code> does not endorse climbing as a recreational activity. Just kidding!</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

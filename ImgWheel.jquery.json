@@ -1,0 +1,26 @@
+{
+  "name": "ImgWheel",
+  "title": "ImgWheel",
+  "description": "Create a responsive, configurable, endless slider from a list of images. Display content related to the slider's central image in a sibling div.",
+  "version": "0.1.0",
+  "homepage": "http://www.benjanes.com/ImgWheel",
+  "author": {
+    "name": "Ben Janes",
+    "email": "ben@benjanes.com",
+    "url": "http://www.benjanes.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benjanes/ImgWheel.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.benjanes.com/ImgWheel/LICENSE-MIT.txt"
+    }
+  ],
+  "dependencies": {
+    "jquery": "~1.7"
+  },
+  "keywords": ["slideshow", "slider", "ui", "display", "images"]
+}

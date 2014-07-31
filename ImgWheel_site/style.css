@@ -1,0 +1,208 @@
+html, body {
+	font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+#top-banner {
+	position: relative;
+	width: 100%;
+	height: 44px;
+	vertical-align: text-bottom;
+	background-color: black;
+	padding: 0;
+	margin: 0 0 0 0;
+	color: white;
+
+}
+
+#left-side {
+	position: absolute;
+	left: 0px;
+	right: 62%;
+	top: 0px;
+	bottom: 0px;
+	border-right: 1px solid black;
+	z-index: -20;
+}
+
+#right-side {
+	position: absolute;
+	left: 380px;
+	right: 0;
+	top: 44px;
+	bottom: 0;
+	z-index: 5;	
+}
+
+.page-title {
+	position: absolute;
+	font-size: 2em;
+	left: 4px;
+	top: -25px;
+}
+
+.page-title h1 {
+	margin: 0;
+	padding: 0;
+}
+
+.main-cats {
+	position: absolute;
+	right: 15px;
+	bottom: 0;
+}
+
+.main-cat {
+	padding-left: 15px;
+	cursor: pointer;
+}
+
+.main-cat:hover {
+	color: red;
+}
+
+.main-cat a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.cat-heading {
+	margin: 4px;
+	color: red;
+}
+
+#demos {
+	position: absolute;
+	width: 100%;
+}
+
+#overview {
+	position: absolute;
+	width: 100%;
+}
+
+#settings {
+	position: absolute;
+	width: 100%;
+}
+
+#overview-left {
+	width: 50%;
+}
+
+.arrow-lrg {
+	display: inline-block;
+	margin-left: 4px;
+	width: 0px; 
+	height: 0px; 
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	border-right: 6px solid black;
+}
+
+.arrow-lrg-top {
+	display: inline-block;
+	margin-left: 4px;
+	width: 0px; 
+	height: 0px; 
+	border-top: 9px solid transparent;
+	border-bottom: 9px solid transparent;
+	border-right: 9px solid black;
+}
+
+.arrow-med {
+	display: inline-block;
+	margin: 0 0 1px 4px;
+	width: 0; 
+	height: 0; 
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	border-right: 6px solid white;
+}
+
+.example {
+	clear: both;
+	position: relative;
+}
+
+.example-title {
+	margin: 0 0 2px 8px;
+	font-size: .9em;
+	cursor: pointer;
+}
+
+.cat-title {
+	margin-left: 4px;
+	cursor: pointer;
+}
+
+.example-info {
+	width: 35%;
+	float: left;
+	padding: 0 0 15px 8px;
+	color: white;
+	margin-top: -10px;
+}
+
+.bg-color {
+	background-color: black;
+}
+
+.example-info-group-heading {
+	padding-top: 5px;
+	cursor: pointer;
+}
+
+.example-info-group-expanded {
+	margin-left: 12px;
+	margin-right: 8px;
+	font-size: .9em;
+}
+
+.demonstration {
+	float: right;
+	width: initial;
+}
+
+.cat-title {
+	clear: both;
+}
+
+th {
+	text-align: left;
+}
+
+
+td {
+	font-size: .8em;
+	padding: 2px 2px 4px 2px;
+	vertical-align: text-top;
+}
+
+#example8 .everythingBut {
+	opacity: .6;
+	-webkit-filter: invert(100%);
+	-moz-filter: invert(100%);
+	filter: invert(100%);
+}
+
+#example8 .onlyCentral {
+	border: 1px solid black;
+}
+
+#static-content {
+	width: 35%;
+	right: 0px;
+	position: absolute;
+	border: 1px solid black;
+	margin-top: 15px;
+}
+
+#static-content p {
+	margin-left: 10px;
+}
+
+#disclaimer {
+	margin: 10px 5px;
+}
