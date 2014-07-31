@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>
-	ImgWheel: A jQuery Plugin
-</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-<script src="jquery.ImgWheel.min.js"></script>
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-<script src="ImgWheel_site/main.min.js"></script>
-<script>
+	<title>
+		ImgWheel: A jQuery Plugin
+	</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+	<script src="jquery.ImgWheel.min.js"></script>
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+	<script src="ImgWheel_site/main.min.js"></script>
+	<script>
 	$(document).ready( function() {
 		$('#overview-example').ImgWheel({articleWidth: '40%', articleAlignment: 'right'});
 		$('#example1').ImgWheel();
@@ -23,8 +23,8 @@
 		$('#example10').ImgWheel({articleWidth: '60%', articleAlignment: 'right'});
 		$('#example11').ImgWheel({articleWidth: '60%', articleAlignment: 'left'});
 	});
-</script>
-<link rel="stylesheet" href="ImgWheel_site/style.css"></link>
+	</script>
+	<link rel="stylesheet" href="ImgWheel_site/style.css"></link>
 </head>
 
 <body>
@@ -46,7 +46,6 @@
 		<div class="example">
 			<h3 class="example-title">The Essentials<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
 				<div class="example-info"></div>
 				<div class="demonstration">
 					<div id="overview-example">
@@ -93,9 +92,9 @@
 		<div class="example">
 			<h3 class="example-title">The HTML<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
 				<div class="example-info"></div>
 				<div class="demonstration">
+					<h3 class="demo-title">The HTML</h3>
 					<p>The first step in including <code>ImgWheel</code> on your site is to set up the HTML for your slideshow. All of the HTML for <code>ImgWheel</code> should go inside of a &#60;div&#62; with an assigned id or class. Within this &#60;div&#62; is placed a &#60;div&#62; with class="image-container". In this &#60;div&#62; go your images. The HTML for a basic slideshow would look like this:</p>
 					<pre class="prettyprint">
 &#60;div id="my-slideshow"&#62;
@@ -159,9 +158,9 @@
 		<div class="example">
 			<h3 class="example-title">The JavaScript<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
 				<div class="example-info"></div>
 				<div class="demonstration">
+					<h3 class="demo-title">The JavaScript</h3>
 					<p>You need to download and save the jquery.ImgWheel.min.js file in your project or site directory. To use <code>ImgWheel</code>, link to this file in your HTML &#60;head&#62;. If you haven't done so already, also link to a version of jQuery (version 1.6 or later). You can link to jQuery via Google without downloading the library into your project directory:</p>
 <pre class="prettyprint">
 &#60;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"&#62;&#60;/script&#62;
@@ -182,9 +181,9 @@ $('#my-slideshow').ImgWheel();</pre>
 		<div class="example">
 			<h3 class="example-title">Settings<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
 				<div class="example-info"></div>
 				<div class="demonstration">
+					<h3 class="demo-title">Settings</h3>
 					<p>To see what the various settings look like when manipulated, check out the Demos section.</p>
 					<table>
 						<tr>
@@ -251,9 +250,9 @@ $('#my-slideshow').ImgWheel();</pre>
 		<div class="example">
 			<h3 class="example-title">The Built-in Classes<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
 				<div class="example-info"></div>
 				<div class="demonstration">
+					<h3 class="demo-title">The Built-in Classes</h3>
 					<p><code>ImgWheel</code> comes with two built in CSS classes. These two classes are added and removed as part of the scrolling function. They allow you to manipulate how the central image and the other images in the slideshow look.</p>
 					<h3><code>.onlyCentral</code></h3>
 					<p>The <code>.onlyCentral</code> class is applied to the central image in the slideshow display. You might want to add a border or filter to this center image. Style away in your CSS!</p>
@@ -265,9 +264,9 @@ $('#my-slideshow').ImgWheel();</pre>
 		<div class="example">
 			<h3 class="example-title">Add Your Own!<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
 				<div class="example-info"></div>
 				<div class="demonstration">
+					<h3 class="demo-title">Go CSS Crazy</h3>
 					<p>Of course, you can add in any CSS styling you want on your own. The only classes that you need to apply yourself in the HTML are to the <code>.image-container</code> and the optional <code>.article-container</code> &#60;div&#62;'s. The only style specifications you will want to steer clear of are altering the dimensions of the display and the alignment of the articles (use the <code>ImgWheel</code> settings to do this!).</p>
 				</div>
 			</div>
@@ -281,7 +280,7 @@ $('#my-slideshow').ImgWheel();</pre>
 		<div class="example">
 			<h3 class="example-title">ImgWheel Default Settings<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
+				<br />
 				<div class="example-info bg-color">
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
@@ -298,6 +297,7 @@ $('#my-slideshow').ImgWheel();</pre>
 					</div>
 				</div>
 				<div class="demonstration">
+					<h3 class="demo-title">Default Settings</h3>
 					<div id="example1">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
@@ -316,7 +316,7 @@ $('#my-slideshow').ImgWheel();</pre>
 		<div class="example">
 			<h3 class="example-title">Setting the Display Size<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
+				<br />
 				<div class="example-info bg-color">
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
@@ -334,6 +334,8 @@ $('#my-slideshow_2').ImgWheel({displayWidth: '400px'});</pre>
 					</div>
 				</div>
 				<div class="demonstration">
+					<h3 class="demo-title">Setting the Display Size</h3>
+					<h4 class="demo-title-sub">Proportional, responsive width</h4>
 					<div id="example2">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
@@ -347,6 +349,7 @@ $('#my-slideshow_2').ImgWheel({displayWidth: '400px'});</pre>
 						</div>
 					</div>
 					<br />
+					<h4 class="demo-title-sub">Fixed width</h4>
 					<div id="example3">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
@@ -365,7 +368,7 @@ $('#my-slideshow_2').ImgWheel({displayWidth: '400px'});</pre>
 		<div class="example">
 			<h3 class="example-title">Scroll Animation Speed Settings<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
+				<br />
 				<div class="example-info bg-color">
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
@@ -382,6 +385,7 @@ $('my-slideshow').ImgWheel({animateSpeed: 1000, delay: 2000});</pre>
 					</div>
 				</div>
 				<div class="demonstration">
+					<h3 class="demo-title">Scroll Animation Speed Settings</h3>
 					<div id="example4">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
@@ -400,7 +404,7 @@ $('my-slideshow').ImgWheel({animateSpeed: 1000, delay: 2000});</pre>
 		<div class="example">
 			<h3 class="example-title">Vertical Alignment of Images<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
+				<br />
 				<div class="example-info bg-color">
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
@@ -417,6 +421,7 @@ $('my-slideshow').ImgWheel({imgPlacement: 'bottom'});</pre>
 					</div>
 				</div>
 				<div class="demonstration">
+					<h3 class="demo-title">Vertical Alignment of Images</h3>
 					<div id="example5">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
@@ -435,7 +440,7 @@ $('my-slideshow').ImgWheel({imgPlacement: 'bottom'});</pre>
 		<div class="example">
 			<h3 class="example-title">Direction of Scrolling<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
+				<br />
 				<div class="example-info bg-color">
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
@@ -452,6 +457,7 @@ $('my-slideshow').ImgWheel({direction: 'reverse'});</pre>
 					</div>
 				</div>
 				<div class="demonstration">
+					<h3 class="demo-title">Direction of Scrolling</h3>
 					<div id="example6">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
@@ -470,7 +476,7 @@ $('my-slideshow').ImgWheel({direction: 'reverse'});</pre>
 		<div class="example">
 			<h3 class="example-title">Changing the Animation Trigger<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
+				<br />
 				<div class="example-info bg-color">
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
@@ -487,6 +493,7 @@ $('my-slideshow').ImgWheel({functionality: 'click'});</pre>
 					</div>
 				</div>
 				<div class="demonstration">
+					<h3 class="demo-title">Changing the Animation Trigger</h3>
 					<div id="example7">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
@@ -508,7 +515,7 @@ $('my-slideshow').ImgWheel({functionality: 'click'});</pre>
 		<div class="example">
 			<h3 class="example-title">Using the ImgWheel CSS Classes<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
+				<br />
 				<div class="example-info bg-color">
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
@@ -538,6 +545,7 @@ $('my-slideshow').ImgWheel();</pre>
 					</div>
 				</div>
 				<div class="demonstration">
+					<h3 class="demo-title">Using the ImgWheel Built-in Classes</h3>
 					<div id="example8">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
@@ -559,7 +567,7 @@ $('my-slideshow').ImgWheel();</pre>
 		<div class="example">
 			<h3 class="example-title">Display Related Content<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
+				<br />
 				<div class="example-info bg-color">
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
@@ -577,6 +585,7 @@ $('my-slideshow').ImgWheel();</pre>
 					</div>
 				</div>
 				<div class="demonstration">
+					<h3 class="demo-title">Display Related Content</h3>
 					<div id="example9">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
@@ -637,7 +646,7 @@ $('my-slideshow').ImgWheel();</pre>
 		<div class="example">
 			<h3 class="example-title">Size and Position the Related Content<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
+				<br />
 				<div class="example-info bg-color">
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
@@ -654,6 +663,7 @@ $('my-slideshow').ImgWheel({articleWidth: '60%', articleAlignment: 'right'});</p
 					</div>
 				</div>
 				<div class="demonstration">
+					<h3 class="demo-title">Positioning Related Content</h3>
 					<div id="example10">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
@@ -706,7 +716,7 @@ $('my-slideshow').ImgWheel({articleWidth: '60%', articleAlignment: 'right'});</p
 		<div class="example">
 			<h3 class="example-title">Include Static Content in the Display<span class="arrow-lrg"></span></h3>
 			<div class="example-content">
-			<hr />
+				<br />
 				<div class="example-info bg-color">
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
@@ -736,6 +746,7 @@ $('my-slideshow').ImgWheel({articleWidth: '60%', articleAlignment: 'left'});</pr
 					</div>
 				</div>
 				<div class="demonstration">
+					<h3 class="demo-title">Displaying Static Content</h3>
 					<div id="example11">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />

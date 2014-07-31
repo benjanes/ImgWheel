@@ -54,7 +54,8 @@ $(document).ready(function () {
         position: 'absolute',
         left: '385px',
         right: '0px',
-        float: 'none'
+        float: 'none',
+        margin: '0 20px',
     });
     $example_title.css({
         position: 'absolute',
@@ -68,12 +69,35 @@ $(document).ready(function () {
     for (var i = 0; i < ex_heights.length; i++) {
         $example_content.eq(i).height(ex_heights[i]+'px');
     }
+    $example_title.eq(0).css({
+        position: 'relative',
+        left: '0px'
+    });
+    $example_content.eq(0).css({position: 'relative', left: '0px', height: ex_heights[0]+'px'});
+    var start_coords = $example_content.eq(0).offset();
+    var start_top = -(start_coords.top)+59;
+    $demo.eq(0).css({
+        top: start_top+'px'
+    });
+    $top_arrow.eq(0).css({
+        transform: 'rotate(-90deg)',
+        '-ms-transform': 'rotate(-90deg)',
+        '-webkit-transform': 'rotate(-90deg)',
+        'border-right': '9px solid red'
+    });
+    $('.arrow-lrg').eq(0).css({
+        transform: 'rotate(-90deg)',
+        '-ms-transform': 'rotate(-90deg)',
+        '-webkit-transform': 'rotate(-90deg)',
+        'border-right': '6px solid red'
+    });
+
     $('.cat-title').toggle(
     function () {
         var $category = $(this).parent('.category'),
             $example = $category.children('.example'),
-            $cat_subs = $example.children($example_title),
-            $this_arrow = $(this).children($top_arrow);
+            $cat_subs = $example.children('.example-title'),
+            $this_arrow = $(this).children('.arrow-lrg-top');
         if ($cat_subs.css('position', 'absolute')) { // if subheadings are hidden
             $example_title.not($cat_subs).css({
                 position: 'absolute',
@@ -90,12 +114,14 @@ $(document).ready(function () {
             $top_arrow.not($this_arrow).css({
                 transform: 'rotate(0deg)',
                 '-ms-transform': 'rotate(0deg)',
-                '-webkit-transform': 'rotate(0deg)'
+                '-webkit-transform': 'rotate(0deg)',
+                'border-right': '9px solid black'
             });
             $this_arrow.css({
                 transform: 'rotate(-90deg)',
                 '-ms-transform': 'rotate(-90deg)',
-                '-webkit-transform': 'rotate(-90deg)'
+                '-webkit-transform': 'rotate(-90deg)',
+                'border-right': '9px solid red'
             });
         } else {
             if ($cat_subs.css('position', 'relative')) { // if subheadings are shown
@@ -111,15 +137,16 @@ $(document).ready(function () {
                 $this_arrow.css({
                     transform: 'rotate(0deg)',
                     '-ms-transform': 'rotate(0deg)',
-                    '-webkit-transform': 'rotate(0deg)'
+                    '-webkit-transform': 'rotate(0deg)',
+                    'border-right': '9px solid black'
                 });
             }
         }
     }, function () {
     var $category = $(this).parent('.category'),
         $example = $category.children('.example'),
-        $cat_subs = $example.children($example_title),
-        $this_arrow = $(this).children($top_arrow);
+        $cat_subs = $example.children('.example-title'),
+        $this_arrow = $(this).children('.arrow-lrg-top');
         if ($cat_subs.css('position', 'relative')) { // if subheadings are shown
             $example_title.css({
                 position: 'absolute',
@@ -133,7 +160,8 @@ $(document).ready(function () {
             $this_arrow.css({
                 transform: 'rotate(0deg)',
                 '-ms-transform': 'rotate(0deg)',
-                '-webkit-transform': 'rotate(0deg)'
+                '-webkit-transform': 'rotate(0deg)',
+                'border-right': '9px solid black'
             });
         } else {
             if ($cat_subs.css('position', 'absolute')) {
@@ -153,43 +181,52 @@ $(document).ready(function () {
                 $top_arrow.not($this_arrow).css({
                     transform: 'rotate(0deg)',
                     '-ms-transform': 'rotate(0deg)',
-                    '-webkit-transform': 'rotate(0deg)'
+                    '-webkit-transform': 'rotate(0deg)',
+                    'border-right': '9px solid black'
                 });
                 $this_arrow.css({
                     transform: 'rotate(-90deg)',
                     '-ms-transform': 'rotate(-90deg)',
-                    '-webkit-transform': 'rotate(-90deg)'
+                    '-webkit-transform': 'rotate(-90deg)',
+                    'border-right': '9px solid red'
                 });
             }
         }
     });
     $example_title.toggle(
     function () { 
-        var $ex_content = $(this).siblings($example_content),
-            $arrow = $(this).children('.arrow-lrg');
+        var $ex_content = $(this).siblings('.example-content');
+        var $this_demo = $ex_content.children('.demonstration');
+        var $arrow = $(this).children('.arrow-lrg');
         if ($ex_content.css('position', 'absolute')) { // if related content is hidden
             $example_content.not($ex_content).css({position: 'absolute', left: '-9999px', height: '0px'});
             ex_content_num = $example_content.index($ex_content);
             $ex_content.css({position: 'relative', left: '0px', height: ex_heights[ex_content_num]+'px'});
+            var ex_content_position = $ex_content.offset();
+            var this_demo_top = -(ex_content_position.top)+59;
+            $this_demo.css('top', this_demo_top+'px');
             $('.arrow-lrg').not($arrow).css({
                 transform: 'rotate(0deg)',
                 '-ms-transform': 'rotate(0deg)',
-                '-webkit-transform': 'rotate(0deg)'
+                '-webkit-transform': 'rotate(0deg)',
+                'border-right': '6px solid black'
             });
             $arrow.css({
                 transform: 'rotate(-90deg)',
                 '-ms-transform': 'rotate(-90deg)',
-                '-webkit-transform': 'rotate(-90deg)'
+                '-webkit-transform': 'rotate(-90deg)',
+                'border-right': '6px solid red'
             });
             $expanded.hide();
-            var $local_expandeds = $ex_content.find($expanded),
+            var $local_expandeds = $ex_content.find('.example-info-group-expanded'),
                 $first_local_expanded = $local_expandeds.eq(0),
                 $first_arrow_med = $first_local_expanded.prev('.example-info-group-heading').children('.arrow-med');
             $first_local_expanded.show();
             $first_arrow_med.css({
                 transform: 'rotate(-90deg)',
                 '-ms-transform': 'rotate(-90deg)',
-                '-webkit-transform': 'rotate(-90deg)'
+                '-webkit-transform': 'rotate(-90deg)',
+                'border-right': '6px solid red'
             });
         } else {
             if ($ex_content.css('position', 'relative')) { // if related content is displayed
@@ -197,58 +234,70 @@ $(document).ready(function () {
                 $arrow.css({
                     transform: 'rotate(0deg)',
                     '-ms-transform': 'rotate(0deg)',
-                    '-webkit-transform': 'rotate(0deg)'
+                    '-webkit-transform': 'rotate(0deg)',
+                    'border-right': '6px solid black'
                 });
             }
         }
     }, function () {
-        var $ex_content = $(this).siblings($example_content),
+        var $ex_content = $(this).siblings('.example-content'),
             $arrow = $(this).children('.arrow-lrg');
         if ($ex_content.css('position', 'relative')) {
             $ex_content.css({position: 'absolute', left: '-9999px', height: '0px'});
             $arrow.css({
                 transform: 'rotate(0deg)',
                 '-ms-transform': 'rotate(0deg)',
-                '-webkit-transform': 'rotate(0deg)'
+                '-webkit-transform': 'rotate(0deg)',
+                'border-right': '6px solid black'
             });
         } else {
             if ($ex_content.css('position', 'absolute')) {
                 $example_content.not($ex_content).css({position: 'absolute', left: '-9999px', height: '0px'});
                 ex_content_num = $example_content.index($ex_content);
                 $ex_content.css({position: 'relative', left: '0px', height: ex_heights[ex_content_num]+'px'});
+                var ex_content_position = $ex_content.offset();
+                var this_demo_top = -($ex_content_position.top)+59;
+                
+
+                $this_demo.css('top', this_demo_top+'px');
+
                 $arrow.css({
                     transform: 'rotate(-90deg)',
                     '-ms-transform': 'rotate(-90deg)',
-                    '-webkit-transform': 'rotate(-90deg)'
+                    '-webkit-transform': 'rotate(-90deg)',
+                    'border-right': '6px solid red'
                 });
                 $expanded.hide();
-                var $local_expandeds = $ex_content.find($expanded);
+                var $local_expandeds = $ex_content.find('.example-info-group-expanded');
                 $local_expandeds.eq(0).show();
             }
         }
     });
     $group_heading.click(
     function () {
-        if ($(this).siblings($expanded).is(':visible')) {
+        if ($(this).siblings('.example-info-group-expanded').is(':visible')) {
             $expanded.hide();
-            $(this).children($med_arrow).css({
+            $(this).children('.arrow-med').css({
                 transform: 'rotate(0deg)',
                 '-ms-transform': 'rotate(0deg)',
-                '-webkit-transform': 'rotate(0deg)'
+                '-webkit-transform': 'rotate(0deg)',
+                'border-right': '6px solid white'
             });
         } else {
-            if ($(this).siblings($expanded).is(':hidden')) {
+            if ($(this).siblings('.example-info-group-expanded').is(':hidden')) {
                 $expanded.hide();
-                $(this).siblings($expanded).show();
+                $(this).siblings('.example-info-group-expanded').show();
                 $med_arrow.css({
                     transform: 'rotate(0deg)',
                     '-ms-transform': 'rotate(0deg)',
-                    '-webkit-transform': 'rotate(0deg)'
+                    '-webkit-transform': 'rotate(0deg)',
+                    'border-right': '6px solid white'
                 });
-                $(this).children($med_arrow).css({
+                $(this).children('.arrow-med').css({
                     transform: 'rotate(-90deg)',
                     '-ms-transform': 'rotate(-90deg)',
-                    '-webkit-transform': 'rotate(-90deg)'
+                    '-webkit-transform': 'rotate(-90deg)',
+                    'border-right': '6px solid red'
                 });
             } 
         }
