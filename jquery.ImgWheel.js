@@ -204,7 +204,7 @@ $.fn.ImgWheel = function(options) {
     var y = images - 2;
     var z = images - 1;
 
-    var animateInterval = settings.animateSpeed;
+    //var animateInterval = settings.animateSpeed;
     var delay = settings.delay;
 
     // Collect href attribute for each image in the ImgWheel if it is wrapped in anchor tags. If
@@ -276,6 +276,8 @@ $.fn.ImgWheel = function(options) {
         $image.show();
       });
     });
+
+    
 
     // Definition for counterclockwise scrolling (to the right)
     var counterclockwise = function(){
@@ -358,6 +360,22 @@ $.fn.ImgWheel = function(options) {
 
     // Definition for clockwise scrolling (to the left)
     var clockwise = function(){
+        //set-up with mouseposition relative to the $(this)?
+        //alternatively, set-up with the position div divided into 5 parts... insert 5 divs into parent div,
+        //set position and width based on w or w of the 'position div'...
+        //use mousemove()?... find relative position within $(this)
+
+      $(this).mousemove(function(e){
+        var this_position = $(this).offset();
+        var rel_x = e.pageX - this_position.left;
+        var range = $(this).width();
+
+        var animateInterval = (1/(rel_x/range))*(settings.animateSpeed);
+
+
+      });
+        
+
       if (img_href[a] !== '') {
         $image.eq(a).unwrap();
       }
