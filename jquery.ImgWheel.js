@@ -12,9 +12,9 @@ $.fn.ImgWheel = function(options) {
 
   // Default settings
   var settings = $.extend({
-      animateSpeedMax: 500,
+      animateSpeedMax: 300,
       animateSpeedMin: 1000,
-      delayMax: 1000,
+      delayMax: 500,
       delayMin: 2000,
       imgPlacement: 'center',
       displayWidth: '100%',
@@ -440,9 +440,39 @@ $.fn.ImgWheel = function(options) {
       }
     }; // end of definition for clockwise scrolling
 
+    function left_timer() {
+      if (settings.direction === 'reverse') {
+        animateInterval = ((1-(rel_x/range))*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+        delay = ((1-(rel_x/range))*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+      } else {
+        if (settings.direction === '') {
+          animateInterval = ((rel_x/range)*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+        delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+        } 
+      }
+      counterclockwise();
+      left_timeout = setTimeout(function(){
+        left_timer();
+      }, delay);
+    }
+    function right_timer() {
+      if (settings.direction === 'reverse') {
+        animateInterval = ((rel_x/range)*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+        delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+      } else {
+        if (settings.direction === '') {
+          animateInterval = ((1-(rel_x/range))*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+          delay = ((1-(rel_x/range))*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+        }
+      }
+      clockwise();
+      right_timeout = setTimeout(function(){
+        right_timer();
+      }, delay);
+    }
+
     // Display arrows on hover and deploy scrolling functions on click if click functionality enabled.
     if (settings.functionality === 'click') {
-      
       $container.hover(
         function() {
           $left_arrow.add($right_arrow).fadeIn(100);
@@ -468,111 +498,41 @@ $.fn.ImgWheel = function(options) {
       });
     } else {
 
-    
     // default settings for triggering scrolling motion
-    if (settings.functionality === '') {
-      $left.bind('touchstart mouseover', function(e) {
-        var this_position = $(this).offset();
-        var rel_x = e.pageX - this_position.left;
-        var range = $(this).width();
-        if (settings.direction = 'reverse') {
-          animateInterval = ((rel_x/range)*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
-          delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
-        } else {
-          if (settings.direction = '') {
-            animateInterval = ((1-(rel_x/range))*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
-            delay = ((1-(rel_x/range))*(settings.delayMin - settings.delayMax)) + settings.delayMax;
-          } 
-        }
-        $(this).mousemove(function(e){
-          var this_position = $(this).offset();
-          var rel_x = e.pageX - this_position.left;
-          var range = $(this).width();
-          if (settings.direction = 'reverse') {
-            animateInterval = ((rel_x/range)*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
-            delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
-          } else {
-            if (settings.direction = '') {
-              animateInterval = ((1-(rel_x/range))*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
-              delay = ((1-(rel_x/range))*(settings.delayMin - settings.delayMax)) + settings.delayMax;
-            } 
-          }
-          
+      if (settings.functionality === '') {
+        $right.bind('touchstart mouseover', function(e){
+          this_position = $(this).offset();
+          rel_x = e.pageX - this_position.left;
+          range = $(this).width();
+          $(this).mousemove(function(e){
+            this_position = $(this).offset();
+            rel_x = e.pageX - this_position.left;
+            range = $(this).width();
+          });
+          right_timer();
         });
-        counterclockwise(); // bypass delay on initial mouseover
-        loop_on_left = setInterval(counterclockwise, delay);
-        e.preventDefault();
-      });
-      $left.bind('touchend mouseout', function(e) {
-        clearInterval(loop_on_left);
-        e.preventDefault();
-      });
-
-
-
-
-
-      $right.bind('touchstart mouseover', function(e) {
-        function loop_on_right() {
-          var this_position = $(this).offset();
-          var rel_x = e.pageX - this_position.left;
-          var range = $(this).width();
-          if (settings.direction = '') {
-            animateInterval = ((rel_x/range)*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
-            //delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
-          } 
-          if (settings.direction = 'reverse') {
-            animateInterval = ((1-(rel_x/range))*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
-            //delay = ((1-(rel_x/range))*(settings.delayMin - settings.delayMax)) + settings.delayMax;
-          }
-          clockwise(); // bypass delay on initial mouseover
+        $right.bind('touchend mouseout', function(e) {
+          clearTimeout(right_timeout);
+          e.preventDefault();
+        });
+  
+        $left.bind('touchstart mouseover', function(e){
+          this_position = $(this).offset();
+          rel_x = e.pageX - this_position.left;
+          range = $(this).width();
           $(this).mousemove(function(e){
-            var this_position = $(this).offset();
-            var rel_x = e.pageX - this_position.left;
-            var range = $(this).width();
-            if (settings.direction = '') {
-              animateInterval = ((rel_x/range)*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
-              delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
-            } 
-            if (settings.direction = 'reverse') {
-              animateInterval = ((1-(rel_x/range))*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
-              delay = ((1-(rel_x/range))*(settings.delayMin - settings.delayMax)) + settings.delayMax;
-            }
+            this_position = $(this).offset();
+            rel_x = e.pageX - this_position.left;
+            range = $(this).width();
           });
-        }
-
-        function right_timer() {
-          loop_on_right();
-          setTimeout(function(){
-            right_timer();
-          }, settings.delayMin);
-        }
-   
-        right_timer();
-  });
-}}
-        
-/*
-        function delay_fn(){
-          $(this).mousemove(function(e){
-            var this_position = $(this).offset();
-            var rel_x = e.pageX - this_position.left;
-            var range = $(this).width();
-            delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
-          });
-          return delay;
-        }
-        loop_on_right = setInterval(clockwise, delay_fn);
-        e.preventDefault();
-      });
-
-
-      $right.bind('touchend mouseout', function(e) {
-        clearInterval(loop_on_right);
-        e.preventDefault();
-      });
-    }*/
-
+          left_timer();
+        });
+        $left.bind('touchend mouseout', function(e) {
+          clearTimeout(left_timeout);
+          e.preventDefault();
+        });
+      }
+    }
 
 /************************************************************************
 ** everything below here is for responsiveness on window resize events **
