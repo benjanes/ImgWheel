@@ -12,8 +12,10 @@ $.fn.ImgWheel = function(options) {
 
   // Default settings
   var settings = $.extend({
-      animateSpeed: 500,
-      delay: 1000,
+      animateSpeedMax: 500,
+      animateSpeedMin: 1000,
+      delayMax: 1000,
+      delayMin: 2000,
       imgPlacement: 'center',
       displayWidth: '100%',
       direction: '',
@@ -105,7 +107,7 @@ $.fn.ImgWheel = function(options) {
     var h = parseInt(($container.css('height')), 10);
 
     $left.add($right).css({
-      width: ((1/4)*w)+'px',
+      width: ((1/3)*w)+'px',
       height: h+'px'
     });
     $articles.css({
@@ -205,7 +207,7 @@ $.fn.ImgWheel = function(options) {
     var z = images - 1;
 
     //var animateInterval = settings.animateSpeed;
-    var delay = settings.delay;
+    //var delay = settings.delay;
 
     // Collect href attribute for each image in the ImgWheel if it is wrapped in anchor tags. If
     // an image is wrapped in anchor tags, remove them. The anchor tags will only be included when
@@ -359,22 +361,7 @@ $.fn.ImgWheel = function(options) {
     }; // end of definition for counterclockwise scrolling
 
     // Definition for clockwise scrolling (to the left)
-    var clockwise = function(){
-        //set-up with mouseposition relative to the $(this)?
-        //alternatively, set-up with the position div divided into 5 parts... insert 5 divs into parent div,
-        //set position and width based on w or w of the 'position div'...
-        //use mousemove()?... find relative position within $(this)
-
-      $(this).mousemove(function(e){
-        var this_position = $(this).offset();
-        var rel_x = e.pageX - this_position.left;
-        var range = $(this).width();
-
-        var animateInterval = (1/(rel_x/range))*(settings.animateSpeed);
-
-
-      });
-        
+    var clockwise = function(){        
 
       if (img_href[a] !== '') {
         $image.eq(a).unwrap();
@@ -455,14 +442,16 @@ $.fn.ImgWheel = function(options) {
 
     // Display arrows on hover and deploy scrolling functions on click if click functionality enabled.
     if (settings.functionality === 'click') {
+      
       $container.hover(
         function() {
           $left_arrow.add($right_arrow).fadeIn(100);
         }, function() {
           $left_arrow.add($right_arrow).fadeOut(100);
         }
-      );
+      ); 
       $left_arrow.click(function() {
+        animateInterval = settings.animateSpeedMin;
         if (settings.direction === 'reverse') {
           clockwise();
         } else {
@@ -470,17 +459,46 @@ $.fn.ImgWheel = function(options) {
         }
       });
       $right_arrow.click(function() {
+        animateInterval = settings.animateSpeedMin;
         if (settings.direction === 'reverse') {
           counterclockwise();
         } else {
           clockwise();
         }
       });
-    } 
+    } else {
 
+    
     // default settings for triggering scrolling motion
     if (settings.functionality === '') {
       $left.bind('touchstart mouseover', function(e) {
+        var this_position = $(this).offset();
+        var rel_x = e.pageX - this_position.left;
+        var range = $(this).width();
+        if (settings.direction = 'reverse') {
+          animateInterval = ((rel_x/range)*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+          delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+        } else {
+          if (settings.direction = '') {
+            animateInterval = ((1-(rel_x/range))*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+            delay = ((1-(rel_x/range))*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+          } 
+        }
+        $(this).mousemove(function(e){
+          var this_position = $(this).offset();
+          var rel_x = e.pageX - this_position.left;
+          var range = $(this).width();
+          if (settings.direction = 'reverse') {
+            animateInterval = ((rel_x/range)*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+            delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+          } else {
+            if (settings.direction = '') {
+              animateInterval = ((1-(rel_x/range))*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+              delay = ((1-(rel_x/range))*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+            } 
+          }
+          
+        });
         counterclockwise(); // bypass delay on initial mouseover
         loop_on_left = setInterval(counterclockwise, delay);
         e.preventDefault();
@@ -490,18 +508,71 @@ $.fn.ImgWheel = function(options) {
         e.preventDefault();
       });
 
-      if (settings.functionality === '') {
-        $right.bind('touchstart mouseover', function(e) {
+
+
+
+
+      $right.bind('touchstart mouseover', function(e) {
+        function loop_on_right() {
+          var this_position = $(this).offset();
+          var rel_x = e.pageX - this_position.left;
+          var range = $(this).width();
+          if (settings.direction = '') {
+            animateInterval = ((rel_x/range)*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+            //delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+          } 
+          if (settings.direction = 'reverse') {
+            animateInterval = ((1-(rel_x/range))*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+            //delay = ((1-(rel_x/range))*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+          }
           clockwise(); // bypass delay on initial mouseover
-          loop_on_right = setInterval(clockwise, delay);
-          e.preventDefault();
-        });
-        $right.bind('touchend mouseout', function(e) {
-          clearInterval(loop_on_right);
-          e.preventDefault();
-        });
-      }
-    }
+          $(this).mousemove(function(e){
+            var this_position = $(this).offset();
+            var rel_x = e.pageX - this_position.left;
+            var range = $(this).width();
+            if (settings.direction = '') {
+              animateInterval = ((rel_x/range)*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+              delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+            } 
+            if (settings.direction = 'reverse') {
+              animateInterval = ((1-(rel_x/range))*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
+              delay = ((1-(rel_x/range))*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+            }
+          });
+        }
+
+        function right_timer() {
+          loop_on_right();
+          setTimeout(function(){
+            right_timer();
+          }, settings.delayMin);
+        }
+   
+        right_timer();
+  });
+}}
+        
+/*
+        function delay_fn(){
+          $(this).mousemove(function(e){
+            var this_position = $(this).offset();
+            var rel_x = e.pageX - this_position.left;
+            var range = $(this).width();
+            delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+          });
+          return delay;
+        }
+        loop_on_right = setInterval(clockwise, delay_fn);
+        e.preventDefault();
+      });
+
+
+      $right.bind('touchend mouseout', function(e) {
+        clearInterval(loop_on_right);
+        e.preventDefault();
+      });
+    }*/
+
 
 /************************************************************************
 ** everything below here is for responsiveness on window resize events **
@@ -515,7 +586,7 @@ $.fn.ImgWheel = function(options) {
       h = parseInt(($container.css('height')), 10);
       $articles.css('top', h+'px');
       $left.add($right).css({
-        width: ((1/4)*w)+'px',
+        width: ((1/3)*w)+'px',
         height: h+'px'
       });
 
