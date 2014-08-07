@@ -2,7 +2,7 @@
   "name": "ImgWheel",
   "title": "ImgWheel",
   "description": "Create a responsive, configurable, endless slider from a list of images. Display content related to the slider's central image in a sibling div.",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "homepage": "http://www.benjanes.com/ImgWheel",
   "author": {
     "name": "Ben Janes",
