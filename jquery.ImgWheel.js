@@ -12,8 +12,8 @@ $.fn.ImgWheel = function(options) {
 
   // Default settings
   var settings = $.extend({
-      animateSpeedMax: 300,
-      animateSpeedMin: 1000,
+      animateSpeedMax: 500,
+      animateSpeedMin: 2000,
       delayMax: 500,
       delayMin: 2000,
       imgPlacement: 'center',
@@ -279,10 +279,8 @@ $.fn.ImgWheel = function(options) {
       });
     });
 
-    
-
     // Definition for counterclockwise scrolling (to the right)
-    var counterclockwise = function(){
+    function counterclockwise() {
       if (img_href[a] !== '') {
         $image.eq(a).unwrap();
       }
@@ -291,7 +289,7 @@ $.fn.ImgWheel = function(options) {
       }
       $article.eq(a).hide();
       $article.eq(b).show();
-      $image.eq(a).stop().animate({
+      $image.eq(a).animate({
         width: (img_fullwidth[a]*(3/5))+'px', 
         height: (h*(3/5))+'px', 
         left: ((w*(17/20))-((img_fullwidth[a]*(3/5))/2))+'px', 
@@ -300,7 +298,7 @@ $.fn.ImgWheel = function(options) {
       }, animateInterval)
       .removeClass('onlyCentral')
       .addClass('everythingBut');
-      $image.eq(b).stop().animate({
+      $image.eq(b).animate({
         width: img_fullwidth[b]+'px', 
         height: h+'px', 
         left: ((w/2)-(img_fullwidth[b]/2))+'px', 
@@ -309,7 +307,7 @@ $.fn.ImgWheel = function(options) {
       }, animateInterval)
       .removeClass('everythingBut')
       .addClass('onlyCentral');
-      $image.eq(c).stop().animate({
+      $image.eq(c).animate({
         width: '0px', 
         height: '0px', 
         left: '0px', 
@@ -321,13 +319,13 @@ $.fn.ImgWheel = function(options) {
         left: ((w*(3/20))-((img_fullwidth[c]*(3/5))/2))+'px', 
         top: med_top
       }, animateInterval);
-      $image.eq(y).stop().animate({
+      $image.eq(y).animate({
         width: '0px', 
         height: '0px', 
         left: '0px', 
         top: zero_top
       }, animateInterval);
-      $image.eq(z).stop().animate({
+      $image.eq(z).animate({
         width: '0px', 
         height: '0px', 
         left: w+'px', 
@@ -361,8 +359,7 @@ $.fn.ImgWheel = function(options) {
     }; // end of definition for counterclockwise scrolling
 
     // Definition for clockwise scrolling (to the left)
-    var clockwise = function(){        
-
+    function clockwise() {        
       if (img_href[a] !== '') {
         $image.eq(a).unwrap();
       }
@@ -371,7 +368,7 @@ $.fn.ImgWheel = function(options) {
       }
       $article.eq(a).hide();
       $article.eq(z).show();
-      $image.eq(a).stop().animate({
+      $image.eq(a).animate({
         width: (img_fullwidth[a]*(3/5))+'px', 
         height: (h*(3/5))+'px', 
         left: ((w*(3/20))-((img_fullwidth[a]*(3/5))/2))+'px', 
@@ -380,19 +377,19 @@ $.fn.ImgWheel = function(options) {
       }, animateInterval)
       .removeClass('onlyCentral')
       .addClass('everythingBut');
-      $image.eq(b).stop().animate({
+      $image.eq(b).animate({
         width: '0px', 
         height: '0px', 
         left: '0px', 
         top: zero_top
       }, animateInterval);
-      $image.eq(c).stop().animate({
+      $image.eq(c).animate({
         width: '0px', 
         height: '0px', 
         left: w+'px', 
         top: zero_top
       }, animateInterval);
-      $image.eq(y).stop().animate({
+      $image.eq(y).animate({
         width: '0px', 
         height: '0px', 
         left: w+'px', 
@@ -404,7 +401,7 @@ $.fn.ImgWheel = function(options) {
         left: ((w*(17/20))-((img_fullwidth[y]*(3/5))/2))+'px', 
         top: med_top
       }, animateInterval);
-      $image.eq(z).stop().animate({
+      $image.eq(z).animate({
         width: img_fullwidth[z]+'px', 
         height: h+'px', 
         left: ((w/2)-(img_fullwidth[z]/2))+'px', 
@@ -437,9 +434,24 @@ $.fn.ImgWheel = function(options) {
         z = images -1;
       } else {
         z--;
-      }
-    }; // end of definition for clockwise scrolling
+      } 
+    };// end of definition for clockwise scrolling
 
+    // Timers set with a small delay to allow for prevention of queue buildup when user mouses over the
+    // triggering div repeatedly
+    function counterclockwise_init() {
+      counterclockwise_timeout = setTimeout(function(){
+        counterclockwise();
+      }, 200);
+    }
+    function clockwise_init() {
+      clockwise_timeout = setTimeout(function(){
+        clockwise();
+      }, 200);
+    }
+
+    // Define functions allowing for variable animation speed during mouseover based on mouse position within
+    // the triggering div
     function left_timer() {
       if (settings.direction === 'reverse') {
         animateInterval = ((1-(rel_x/range))*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
@@ -447,10 +459,10 @@ $.fn.ImgWheel = function(options) {
       } else {
         if (settings.direction === '') {
           animateInterval = ((rel_x/range)*(settings.animateSpeedMin - settings.animateSpeedMax)) + settings.animateSpeedMax;
-        delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
+          delay = ((rel_x/range)*(settings.delayMin - settings.delayMax)) + settings.delayMax;
         } 
       }
-      counterclockwise();
+      counterclockwise_init();
       left_timeout = setTimeout(function(){
         left_timer();
       }, delay);
@@ -465,7 +477,7 @@ $.fn.ImgWheel = function(options) {
           delay = ((1-(rel_x/range))*(settings.delayMin - settings.delayMax)) + settings.delayMax;
         }
       }
-      clockwise();
+      clockwise_init();
       right_timeout = setTimeout(function(){
         right_timer();
       }, delay);
@@ -497,7 +509,6 @@ $.fn.ImgWheel = function(options) {
         }
       });
     } else {
-
     // default settings for triggering scrolling motion
       if (settings.functionality === '') {
         $right.bind('touchstart mouseover', function(e){
@@ -512,10 +523,10 @@ $.fn.ImgWheel = function(options) {
           right_timer();
         });
         $right.bind('touchend mouseout', function(e) {
+          clearTimeout(clockwise_timeout);
           clearTimeout(right_timeout);
           e.preventDefault();
         });
-  
         $left.bind('touchstart mouseover', function(e){
           this_position = $(this).offset();
           rel_x = e.pageX - this_position.left;
@@ -528,6 +539,7 @@ $.fn.ImgWheel = function(options) {
           left_timer();
         });
         $left.bind('touchend mouseout', function(e) {
+          clearTimeout(counterclockwise_timeout);
           clearTimeout(left_timeout);
           e.preventDefault();
         });

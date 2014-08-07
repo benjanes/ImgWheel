@@ -2,6 +2,14 @@ html, body {
 	font-family: sans-serif;
 	margin: 0;
 	padding: 0;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+#page-wrap {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
 }
 
 #top-banner {
@@ -20,7 +28,7 @@ html, body {
 	position: absolute;
 	left: 0px;
 	right: 62%;
-	top: 0px;
+	min-height: 100%;
 	bottom: 0px;
 	border-right: 1px solid black;
 	z-index: -20;
@@ -210,4 +218,17 @@ td {
 
 #disclaimer {
 	margin: 10px 5px;
+}
+
+#footer {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	background-color: black;
+	color: white;
+}
+
+#footer a {
+	text-decoration: none;
+	color: white;
 }
