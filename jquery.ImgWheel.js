@@ -206,9 +206,6 @@ $.fn.ImgWheel = function(options) {
     var y = images - 2;
     var z = images - 1;
 
-    //var animateInterval = settings.animateSpeed;
-    //var delay = settings.delay;
-
     // Collect href attribute for each image in the ImgWheel if it is wrapped in anchor tags. If
     // an image is wrapped in anchor tags, remove them. The anchor tags will only be included when
     // an image is in the central position in the ImgWheel, and only if it had anchor tags to begin with.
@@ -356,7 +353,7 @@ $.fn.ImgWheel = function(options) {
       } else {
         z++;
       } 
-    }; // end of definition for counterclockwise scrolling
+    } // end of definition for counterclockwise scrolling
 
     // Definition for clockwise scrolling (to the left)
     function clockwise() {        
@@ -435,7 +432,7 @@ $.fn.ImgWheel = function(options) {
       } else {
         z--;
       } 
-    };// end of definition for clockwise scrolling
+    } // end of definition for clockwise scrolling
 
     // Timers set with a small delay to allow for prevention of queue buildup when user mouses over the
     // triggering div repeatedly
@@ -449,20 +446,6 @@ $.fn.ImgWheel = function(options) {
         clockwise();
       }, 200);
     }
-
-/*
-    function counterclockwise_click() {
-      counterclockwise_timeout = setTimeout(function(){
-        counterclockwise();
-      }, 200);
-    }
-    function clockwise_click() {
-      clockwise_timeout = setTimeout(function(){
-        clockwise();
-      }, 200);
-    }
-*/
-
 
     // Define functions allowing for variable animation speed during mouseover based on mouse position within
     // the triggering div
@@ -497,6 +480,8 @@ $.fn.ImgWheel = function(options) {
       }, delay);
     }
 
+    // Define handler functions with timeouts to permit function triggering only after the prior function
+    // has been run (duration of prior function is equal to animateInterval)
     function left_click_handler(){
       animateInterval = settings.animateSpeedMax;
       if (settings.direction === 'reverse') {
@@ -668,7 +653,7 @@ $.fn.ImgWheel = function(options) {
         }
       }
       $articles.css('left', article_align);
-      } // end of set_sizes
+      } // end of set_sizes() definition
 
       var resizeTimer;
       $(window).resize(function() {

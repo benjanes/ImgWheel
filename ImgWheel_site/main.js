@@ -14,11 +14,8 @@ $(document).ready(function () {
         $demos_heading = $('#demos-heading'),
         $settings_heading = $('#settings-heading'),
         $overview_heading = $('#overview-heading'),
-        $main_cat = $('.main-cat');
-        $wrapper = $('#page-wrap');
-
-    var viewport_height = '';
-
+        $wrapper = $('#page-wrap'),
+        viewport_height = '';
     $left_bar.css({
         width: '380px'
     });
@@ -95,68 +92,52 @@ $(document).ready(function () {
         '-webkit-transform': 'rotate(-90deg)',
         'border-right': '6px solid red'
     });
-
     $('.cat-title').toggle(
     function () {
         var $category = $(this).parent('.category'),
             $page_area = $category.parent('div'),
-            $page_area_cats = $page_area.children('.category')
+            $page_area_cats = $page_area.children('.category'),
             $example = $category.children('.example'),
             $cat_subs = $example.children('.example-title'),
-            $this_arrow = $(this).children('.arrow-lrg-top');
-
-
-
-        var cat_heading_height = $('.cat-heading').outerHeight(true);
-        var cat_title_heights = 0;
-        var category_subs_heights = [];
-
-
-        //var max_example_title_heights = 0;
-        //var max_info_group_height = 0;
-
-        $page_area_cats.children('.cat-title').each(function(){
+            $this_arrow = $(this).children('.arrow-lrg-top'),
+            cat_heading_height = $('.cat-heading').outerHeight(true),
+            cat_title_heights = 0,
+            category_subs_heights = [],
+            page_area_cat_exTitleHeights = [],
+            category_subs_heights = [];
+        $page_area_cats.children('.cat-title').each(function () {
             var height = $(this).outerHeight(true);
             cat_title_heights += height;
         });
-
-        var page_area_cat_exTitleHeights = [];
-        var category_subs_heights = [];
         $page_area_cats.each(function(){
             var example_title_heights = 0;
-            $(this).find('.example-title').each(function(){
+            $(this).find('.example-title').each(function () {
                 var height = $(this).outerHeight(true);
                 example_title_heights += height;
             });
             page_area_cat_exTitleHeights.push(example_title_heights);
-            
-            var expanded_heights = [];
-            var $expandeds = $(this).find($expanded);
+            var expanded_heights = [],
+                $expandeds = $(this).find($expanded);
             $expandeds.each(function(){
                 var height = $(this).height();
                 expanded_heights.push(height);
             });
             if (expanded_heights[0] !== undefined) {
-                var max_expanded_height = Math.max.apply(Math,expanded_heights);
-                var heading_height = $group_heading.outerHeight(true);
+                var max_expanded_height = Math.max.apply(Math,expanded_heights),
+                    heading_height = $group_heading.outerHeight(true);
             } else {
-                if (expanded_heights[0] == undefined) {
-                    var max_expanded_height = 0;
-                    var heading_height = 0;
+                if (expanded_heights[0] === undefined) {
+                    var max_expanded_height = 0,
+                        heading_height = 0;
                 }
             }
             var sub_cat_height = max_expanded_height + (2*heading_height);
             category_subs_heights.push(sub_cat_height);
         });
-
         //want to add together the cat_title_heights, max of category_subs_heights, max of page_area_cat_exTitleHeights
-        var max_category_subs_heights = Math.max.apply(Math,category_subs_heights);
-        var max_page_area_cat_exTitleHeights = Math.max.apply(Math,page_area_cat_exTitleHeights);
+        var max_category_subs_heights = Math.max.apply(Math,category_subs_heights),
+            max_page_area_cat_exTitleHeights = Math.max.apply(Math,page_area_cat_exTitleHeights);
         max_left_side_height = max_category_subs_heights + max_page_area_cat_exTitleHeights + cat_title_heights + cat_heading_height;
-        
-        //alert(max_left_side_height);
-
-
         if ($cat_subs.css('position', 'absolute')) { // if subheadings are hidden
             $example_title.not($cat_subs).css({
                 position: 'absolute',
@@ -254,40 +235,31 @@ $(document).ready(function () {
     });
     $example_title.toggle(
     function () { 
-        var $ex_content = $(this).siblings('.example-content');
-        var $this_demo = $ex_content.children('.demonstration');
-        var $arrow = $(this).children('.arrow-lrg');
+        var $ex_content = $(this).siblings('.example-content'),
+            $this_demo = $ex_content.children('.demonstration'),
+            $arrow = $(this).children('.arrow-lrg');
         if ($ex_content.css('position', 'absolute')) { // if related content is hidden
             $example_content.not($ex_content).css({position: 'absolute', left: '-9999px', height: '0px'});
             ex_content_num = $example_content.index($ex_content);
             $ex_content.css({position: 'relative', left: '0px', height: ex_heights[ex_content_num]+'px'});
-            var ex_content_position = $ex_content.offset();
-            var this_demo_top = -(ex_content_position.top)+59;
+            var ex_content_position = $ex_content.offset(),
+                this_demo_top = -(ex_content_position.top)+59;
             $this_demo.css('top', this_demo_top+'px');
-
-
-
-
-
-            //collect height of ($this_demo+144) and window (or viewport?)
+            //collect height of ($this_demo+144) and window
             var demo_height = $this_demo.height();
             demo_height_test = demo_height+134;
             viewport_height = $(window).height();
-            left_side_height = max_left_side_height+179;
+            left_side_height = max_left_side_height+254;
 
             //need to add up heights of all visible components on left of screen
-            var cat_heading_height = $('.cat-heading:visible').outerHeight(true);
-            var cat_titles_height = 0;
-
-
+            var cat_heading_height = $('.cat-heading:visible').outerHeight(true),
+                cat_titles_height = 0;
             $('.cat-title').css('position', 'relative').each(function(){
                 cat_titles_height += $(this).outerHeight(true);
             });
-
-            var set_height = [demo_height_test, viewport_height, left_side_height];
-            var doc_height = Math.max.apply(Math,set_height);
+            var set_height = [demo_height_test, viewport_height, left_side_height],
+                doc_height = Math.max.apply(Math,set_height);
             $wrapper.height(doc_height);
-
             $('.arrow-lrg').not($arrow).css({
                 transform: 'rotate(0deg)',
                 '-ms-transform': 'rotate(0deg)',
@@ -338,12 +310,9 @@ $(document).ready(function () {
                 $example_content.not($ex_content).css({position: 'absolute', left: '-9999px', height: '0px'});
                 ex_content_num = $example_content.index($ex_content);
                 $ex_content.css({position: 'relative', left: '0px', height: ex_heights[ex_content_num]+'px'});
-                var ex_content_position = $ex_content.offset();
-                var this_demo_top = -($ex_content_position.top)+59;
-                
-
+                var ex_content_position = $ex_content.offset(),
+                    this_demo_top = -($ex_content_position.top)+59;
                 $this_demo.css('top', this_demo_top+'px');
-
                 $arrow.css({
                     transform: 'rotate(-90deg)',
                     '-ms-transform': 'rotate(-90deg)',

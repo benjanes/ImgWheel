@@ -5,23 +5,25 @@
 		ImgWheel: A jQuery Plugin
 	</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-	<script src="jquery.ImgWheel.js"></script>
-	<!--<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>-->
-	<script src="ImgWheel_site/main.js"></script>
+	<script src="jquery.ImgWheel.min.js"></script>
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+	<script src="ImgWheel_site/main.min.js"></script>
 	<script>
 	$(document).ready( function() {
 		$('#overview-example').ImgWheel({articleWidth: '40%', articleAlignment: 'right'});
 		$('#example1').ImgWheel();
 		$('#example2').ImgWheel({displayWidth: '50%'});
 		$('#example3').ImgWheel({displayWidth: '400px'});
-		$('#example4').ImgWheel({animateSpeed: 1000, delay: 2000});
-		$('#example5').ImgWheel({imgPlacement: 'bottom'});
-		$('#example6').ImgWheel({direction: 'reverse'});
-		$('#example7').ImgWheel({functionality: 'click'});
-		$('#example8').ImgWheel();
-		$('#example9').ImgWheel();
-		$('#example10').ImgWheel({articleWidth: '60%', articleAlignment: 'right'});
-		$('#example11').ImgWheel({articleWidth: '60%', articleAlignment: 'left'});
+		$('#example4').ImgWheel({animateSpeedMax: 1000, animateSpeedMin: 1000, delayMax: 1400, delayMin: 1400});
+		$('#example5').ImgWheel({animateSpeedMax: 400, animateSpeedMin: 400, delayMax: 500, delayMin: 1750});
+		$('#example6').ImgWheel({animateSpeedMax: 200, animateSpeedMin: 3000, delayMax: 1000, delayMin: 3000});
+		$('#example7').ImgWheel({imgPlacement: 'bottom'});
+		$('#example8').ImgWheel({direction: 'reverse'});
+		$('#example9').ImgWheel({functionality: 'click'});
+		$('#example10').ImgWheel();
+		$('#example11').ImgWheel();
+		$('#example12').ImgWheel({articleWidth: '60%', articleAlignment: 'right'});
+		$('#example13').ImgWheel({articleWidth: '60%', articleAlignment: 'left'});
 	});
 	</script>
 	<link rel="stylesheet" href="ImgWheel_site/style.css"></link>
@@ -201,16 +203,28 @@ $('#my-slideshow').ImgWheel();</pre>
 							<td>This is the width of the entire <code>ImgWheel</code> display, which includes the slideshow and any other related content below the slideshow but within the targeted &#60;div&#62;. Relative sizing allows for responsiveness, whereas switching to a fixed width (in px) will negate this functionality.</td>
 						</tr>
 						<tr>
-							<td><code>animateSpeed</code></td>
+							<td><code>animateSpeedMax</code></td>
 							<td><code>500</code></td>
-							<td>Any animation speed can be specified.</td>
-							<td>The speed (length of time) of the animated transition from one image to the next. Speed is in milliseconds.</td>
+							<td>Any animation speed can be specified. Should be a value less than or equal to animateSpeedMin.</td>
+							<td>The fastest speed (shortest length of time) of the animated transition from one image to the next. Animation speed is equal to animateSpeedMax when the user's mouse is at the far end of the image container. Speed is in milliseconds.</td>
 						</tr>
 						<tr>
-							<td><code>delay</code></td>
-							<td><code>1000</code></td>
-							<td>Any animation delay time can be specified.</td>
-							<td>The duration that each image (and the related content) is displayed while the ImgWheel is in motion, i.e. being hovered over. If the 'click' functionality is enabled (see below), this setting is irrelevant.</td>
+							<td><code>animateSpeedMin</code></td>
+							<td><code>2000</code></td>
+							<td>Any animation speed can be specified. Should be a value less than or equal to animateSpeedMax.</td>
+							<td>The slowest speed (longest length of time) of the animated transition from one image to the next. Animation speed is equal to animateSpeedMin when the user's mouse triggers is closest to the center of the image container. Speed is in milliseconds.</td>
+						</tr>
+						<tr>
+							<td><code>delayMax</code></td>
+							<td><code>500</code></td>
+							<td>Any animation delay time can be specified. <strong>Must be greater than or equal to animateSpeedMax.</strong></td>
+							<td>The duration that each image (and the related content) is displayed while the ImgWheel is in motion, i.e. being hovered over. This essentially sets the pause of the central image before it is animated to the next slot in the display when the animation is moving at its highest rate of speed. The pause is the difference between delayMax and animateSpeedMax. For instance, if delayMax is set to 800 and animateSpeedMax is set to 500, the pause on the central image during hovering will be 300 milliseconds when the user's cursor is at an extreme end of the image container. If the 'click' functionality is enabled (see below), this setting is irrelevant.</td>
+						</tr>
+						<tr>
+							<td><code>delayMin</code></td>
+							<td><code>2000</code></td>
+							<td>Any animation delay time can be specified. <strong>Must be greater than or equal to animateSpeedMin.</strong></td>
+							<td>The duration that each image (and the related content) is displayed while the ImgWheel is in motion, i.e. being hovered over. This essentially sets the pause of the central image before it is animated to the next slot in the display when the animation is moving at its lowest speed. The pause is the difference between delayMin and animateSpeedMin. For instance, if delayMin is set to 2200 and animateSpeedMin is set to 2000, the pause on the central image during hovering will be 200 milliseconds when the user's cursor is near the center of the image container. If the 'click' functionality is enabled (see below), this setting is irrelevant.</td>
 						</tr>
 						<tr>
 							<td><code>imgPlacement</code></td>
@@ -228,7 +242,7 @@ $('#my-slideshow').ImgWheel();</pre>
 							<td><code>functionality</code></td>
 							<td><code>''</code></td>
 							<td><code>''</code> or <code>'click'</code></td>
-							<td>The slideshow animation is triggered by hover or touch (when available) by default. Switching to <code>'click'</code> causes directional arrows to appear when hovering over the display... clicking these arrows triggers one step of the slideshow scrolling.</td>
+							<td>The slideshow animation is triggered by hover or touch (when available) by default. Switching to <code>'click'</code> causes directional arrows to appear when hovering over the display... clicking these arrows triggers one step of the slideshow scrolling. The speed of the transition animation when click is enabled is set using animateSpeedMax, so is 500 milliseconds by default.</td>
 						</tr>
 						<tr>
 							<td><code>articleWidth</code></td>
@@ -375,20 +389,55 @@ $('#my-slideshow_2').ImgWheel({displayWidth: '400px'});</pre>
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Description<span class="arrow-med"></span></div>
 						<div class="example-info-group-expanded">
-							<p>The speed of the scrolling animation and the delay before the next animation takes place (while 	the user is hovering) can be controlled via the <code>	animateSpeed</code> and <code>delay</code> settings, respectively. These are set to 500 and 1000 milliseconds by default. Here the <code>animateSpeed</code> setting has been changed to 1000 ms and the <code>delay</code> setting has been changed to 2000 ms.</p>
+							<p>Four properties combine to control the speed of the scrolling animation. The animation speed settings (<code>animateSpeedMax</code> and <code>animateSpeedMin</code>) set how fast an image will transition from one position to the next. This is the time that the images are 'in motion'. The reason there are two settings, a max and a min, is that the speed will change based on the user's mouse position. When the user mouses toward the outside of the display, the speed throttles up toward the maximum setting; when the mouse moves in toward the middle of the display, the speed decreases toward the minimum setting. You are setting the range of possible animation speeds when you specify these two properties. That being said, if you don't want the animation to vary speed depending on cursor position, set the maximum and minimum equal to each other (as shown in the first example to the right).</p>
+							<p>The animation delay settings (<code>delayMax</code> and <code>delayMin</code>) control the total time it takes for one cycle of the transition animation to take place. The delay time encompasses the animation time, so in order for ImgWheel to work the specified delays must be equal to or greater than the specified animation times. Time for the minimum delay in excess of the <code>animateSpeedMin</code> setting will equal the time that an image pauses before moving onto the next position in the animation. Same with the maximum delay and the <code>animateSpeedMax</code> setting. In other words, if you set <code>animateSpeedMin</code> equal to <code>delayMin</code>, the images will not pause in a given location before moving on to the next location when the animation is moving at its slowest speed (when the user's cursor is near to the center of the display).</p>
+							<p>Confused yet? This is getting to be like trying to fly a toy helicopter! Don't worry, this is the only semi-complicated thing about ImgWheel. Take a look at the examples on the right and the sample JavaScript corresponding to each below</p>
 						</div>
 					</div>
 					<div class="example-info-group">
 						<div class="example-info-group-heading">Example JavaScript Code<span class="arrow-med"></span></div>
 						<div class="example-info-group-expanded">
 <pre class="prettyprint">
-$('my-slideshow').ImgWheel({animateSpeed: 1000, delay: 2000});</pre>
+$('#my-slideshow_1').ImgWheel({animateSpeedMax: 1000, animateSpeedMin: 1000, delayMax: 1400, delayMin: 1400});
+
+$('my-slideshow_2').ImgWheel({animateSpeedMax: 400, animateSpeedMin: 400, delayMax: 500, delayMin: 1750});
+
+$('#my-slideshow_3').ImgWheel({animateSpeedMax: 200, animateSpeedMin: 3000, delayMax: 1000, delayMin: 3000});</pre>
 						</div>
 					</div>
 				</div>
 				<div class="demonstration">
 					<h3 class="demo-title">Scroll Animation Speed Settings</h3>
+					<h4 class="demo-title-sub">One speed and one delay, regardless of cursor position</h4>
 					<div id="example4">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+					</div>
+					<br />
+					<h4 class="demo-title-sub">One speed, variable delay</h4>
+					<div id="example5">
+						<div class="image-container">
+							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
+							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
+							<img src="ImgWheel_site/images/fracture.jpg" alt="Fracture" />
+							<img src="ImgWheel_site/images/lamb.jpg" alt="On the Lamb" />
+							<img src="ImgWheel_site/images/matthes.jpg" alt="Matthes Crest" />
+							<img src="ImgWheel_site/images/pillar.jpg" alt="Third Pillar" />
+							<img src="ImgWheel_site/images/scarface.jpg" alt="Scarface" />
+							<img src="ImgWheel_site/images/traveler.jpg" alt="Traveler Buttress" />
+						</div>
+					</div>
+					<br />
+					<h4 class="demo-title-sub">Variable speed, variable delay</h4>
+					<div id="example6">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
 							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
@@ -424,7 +473,7 @@ $('my-slideshow').ImgWheel({imgPlacement: 'bottom'});</pre>
 				</div>
 				<div class="demonstration">
 					<h3 class="demo-title">Vertical Alignment of Images</h3>
-					<div id="example5">
+					<div id="example7">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
 							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
@@ -460,7 +509,7 @@ $('my-slideshow').ImgWheel({direction: 'reverse'});</pre>
 				</div>
 				<div class="demonstration">
 					<h3 class="demo-title">Direction of Scrolling</h3>
-					<div id="example6">
+					<div id="example8">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
 							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
@@ -496,7 +545,7 @@ $('my-slideshow').ImgWheel({functionality: 'click'});</pre>
 				</div>
 				<div class="demonstration">
 					<h3 class="demo-title">Changing the Animation Trigger</h3>
-					<div id="example7">
+					<div id="example9">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
 							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
@@ -548,7 +597,7 @@ $('my-slideshow').ImgWheel();</pre>
 				</div>
 				<div class="demonstration">
 					<h3 class="demo-title">Using the ImgWheel Built-in Classes</h3>
-					<div id="example8">
+					<div id="example10">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
 							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
@@ -588,7 +637,7 @@ $('my-slideshow').ImgWheel();</pre>
 				</div>
 				<div class="demonstration">
 					<h3 class="demo-title">Display Related Content</h3>
-					<div id="example9">
+					<div id="example11">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
 							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
@@ -666,7 +715,7 @@ $('my-slideshow').ImgWheel({articleWidth: '60%', articleAlignment: 'right'});</p
 				</div>
 				<div class="demonstration">
 					<h3 class="demo-title">Positioning Related Content</h3>
-					<div id="example10">
+					<div id="example12">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
 							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
@@ -749,7 +798,7 @@ $('my-slideshow').ImgWheel({articleWidth: '60%', articleAlignment: 'left'});</pr
 				</div>
 				<div class="demonstration">
 					<h3 class="demo-title">Displaying Static Content</h3>
-					<div id="example11">
+					<div id="example13">
 						<div class="image-container">
 							<img src="ImgWheel_site/images/bluesun.jpg" alt="Blue Sun" />
 							<img src="ImgWheel_site/images/cave.jpg" alt="Cave Route" />
@@ -805,7 +854,8 @@ $('my-slideshow').ImgWheel({articleWidth: '60%', articleAlignment: 'left'});</pr
 	</div>
 </div>
 <div id="footer">
-	<p>&copy; 2014 Ben Janes &nbsp;&nbsp;&nbsp;&nbsp; Get in touch via <a href="http://www.benjanes.com">www.benjanes.com</a></p>
+	<span class="copyinfo">&copy; 2014 Ben Janes</span>
+	<span class="homelink"><a href="http://www.benjanes.com">www.benjanes.com</a></span>
 </div>
 
 </div>

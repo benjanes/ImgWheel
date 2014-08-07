@@ -226,9 +226,19 @@ td {
 	width: 100%;
 	background-color: black;
 	color: white;
+	z-index: 10;
 }
 
 #footer a {
 	text-decoration: none;
 	color: white;
+}
+
+#footer .copyinfo {
+	float: left;
+	padding-left: 10px;
+}
+#footer .homelink {
+	float: right;
+	padding-right: 10px;
 }
