@@ -450,6 +450,20 @@ $.fn.ImgWheel = function(options) {
       }, 200);
     }
 
+/*
+    function counterclockwise_click() {
+      counterclockwise_timeout = setTimeout(function(){
+        counterclockwise();
+      }, 200);
+    }
+    function clockwise_click() {
+      clockwise_timeout = setTimeout(function(){
+        clockwise();
+      }, 200);
+    }
+*/
+
+
     // Define functions allowing for variable animation speed during mouseover based on mouse position within
     // the triggering div
     function left_timer() {
@@ -483,6 +497,29 @@ $.fn.ImgWheel = function(options) {
       }, delay);
     }
 
+    function left_click_handler(){
+      animateInterval = settings.animateSpeedMax;
+      if (settings.direction === 'reverse') {
+        clockwise();
+      } else {
+        counterclockwise();
+      }
+      setTimeout(function(){
+        $left_arrow.one('click', left_click_handler);
+      }, animateInterval);
+    }
+    function right_click_handler(){
+      animateInterval = settings.animateSpeedMax;
+      if (settings.direction === 'reverse') {
+        counterclockwise();
+      } else {
+        clockwise();
+      }
+      setTimeout(function(){
+        $right_arrow.one('click', right_click_handler);
+      }, animateInterval);
+    }
+
     // Display arrows on hover and deploy scrolling functions on click if click functionality enabled.
     if (settings.functionality === 'click') {
       $container.hover(
@@ -491,23 +528,9 @@ $.fn.ImgWheel = function(options) {
         }, function() {
           $left_arrow.add($right_arrow).fadeOut(100);
         }
-      ); 
-      $left_arrow.click(function() {
-        animateInterval = settings.animateSpeedMin;
-        if (settings.direction === 'reverse') {
-          clockwise();
-        } else {
-          counterclockwise();
-        }
-      });
-      $right_arrow.click(function() {
-        animateInterval = settings.animateSpeedMin;
-        if (settings.direction === 'reverse') {
-          counterclockwise();
-        } else {
-          clockwise();
-        }
-      });
+      );
+      $left_arrow.one('click', left_click_handler);
+      $right_arrow.one('click', right_click_handler);
     } else {
     // default settings for triggering scrolling motion
       if (settings.functionality === '') {
