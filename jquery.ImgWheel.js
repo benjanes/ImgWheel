@@ -29,16 +29,16 @@ $.fn.ImgWheel = function(options) {
     $display.css({
       position: 'relative',
     });
-    var $container = $(this).children('.image-container');
-    var $articles = $(this).children('.article-container');
-    var $image = $container.find('img');
-    var images = $image.length;
-    var $article = $articles.find('article');
+    var $container = $(this).children('.image-container'),
+        $articles = $(this).children('.article-container'),
+        $image = $container.find('img'),
+        images = $image.length,
+        $article = $articles.find('article');
 
     // Add divs for triggering animations
     $container.append('<div class="left-ImgWheel-scroll"></div><div class="right-ImgWheel-scroll"></div>');
-    var $left = $container.children('.left-ImgWheel-scroll');
-    var $right = $container.children('.right-ImgWheel-scroll');
+    var $left = $container.children('.left-ImgWheel-scroll'),
+        $right = $container.children('.right-ImgWheel-scroll');
     
     // Select any extra divs within the targeted div for display below ImgWheel, if
     // such divs are present. These are placed vertically and resized below.
@@ -57,14 +57,21 @@ $.fn.ImgWheel = function(options) {
     }
 
     if (settings.functionality === 'click') {
-      $left_arrow = $('.left-arrow');
-      $right_arrow = $('.right-arrow');
+      var $left_arrow = $container.find('.left-arrow'),
+          $right_arrow = $container.find('.right-arrow');
       $left_arrow.add($right_arrow).hide().css({
         position: 'absolute',
         color: 'white',
         'text-shadow': '1px 1px 5px black, 1px -1px 5px black, -1px -1px 5px black, -1px 1px 5px black',
         cursor: 'pointer'
       });
+      $container.hover(
+        function() {
+          $left_arrow.add($right_arrow).fadeIn(100);
+        }, function() {
+          $left_arrow.add($right_arrow).fadeOut(100);
+        }
+      );
     }
 
     // Swap left and right trigger div placement depending on ImgWheel direction. 
@@ -136,8 +143,8 @@ $.fn.ImgWheel = function(options) {
 
     // Total height of the display is set equal to height of the image container plus the height
     // of either the tallest article or the tallest extra div (nonImgWheel_div), whichever is tallest.
-    var subDivs = articleHeights.concat(nonImgWheel_divHeights);
-    var max_subDiv_h = Math.max.apply(Math,subDivs);
+    var subDivs = articleHeights.concat(nonImgWheel_divHeights),
+        max_subDiv_h = Math.max.apply(Math,subDivs);
     $display.css({
       height: (h+max_subDiv_h)+'px'
     });
@@ -154,8 +161,8 @@ $.fn.ImgWheel = function(options) {
     $articles.css('left', article_align);
     $article.hide();
     if (settings.imgPlacement === 'top') {
-      var zero_top = '0px'; // zero_top refers to top of an image when its height is 0px (not displayed)
-      var med_top = '0px'; // med_top refers to top of image when it has intermediate height (on either side of display)
+      var zero_top = '0px', // zero_top refers to top of an image when its height is 0px (not displayed)
+          med_top = '0px'; // med_top refers to top of image when it has intermediate height (on either side of display)
       if (settings.functionality === 'click') {
         $left_arrow.css({
           bottom: '5px',
@@ -168,8 +175,8 @@ $.fn.ImgWheel = function(options) {
       }
     } else {
       if (settings.imgPlacement === 'bottom') {
-        var zero_top = h+'px';
-        var med_top = (h*(2/5))+'px';
+        var zero_top = h+'px',
+            med_top = (h*(2/5))+'px';
         if (settings.functionality === 'click') {
           $left_arrow.css({
           top: '5px',
@@ -181,8 +188,8 @@ $.fn.ImgWheel = function(options) {
         });
         }
       } else {
-        var zero_top = (h/2)+'px';
-        var med_top = (h*(1/5))+'px';
+        var zero_top = (h/2)+'px',
+            med_top = (h*(1/5))+'px';
         if (settings.functionality === 'click') {
           $left_arrow.css({
           bottom: '5px',
@@ -200,11 +207,11 @@ $.fn.ImgWheel = function(options) {
     $image.css('position', 'absolute').hide();
 
     // Set counter variables for ImgWheel scrolling.
-    var a = 0;
-    var b = 1;
-    var c = 2;
-    var y = images - 2;
-    var z = images - 1;
+    var a = 0,
+        b = 1,
+        c = 2,
+        y = images - 2,
+        z = images - 1;
 
     // Collect href attribute for each image in the ImgWheel if it is wrapped in anchor tags. If
     // an image is wrapped in anchor tags, remove them. The anchor tags will only be included when
@@ -237,8 +244,8 @@ $.fn.ImgWheel = function(options) {
       $image.each(function(){
         var nativeCopy = new Image();
         nativeCopy.src = $(this).attr("src");
-        var imageWidth = nativeCopy.width;
-        var imageHeight = nativeCopy.height;
+        var imageWidth = nativeCopy.width,
+            imageHeight = nativeCopy.height;
         aspectratio.push(imageWidth/imageHeight);
       });
       for(var i = 0; i < $image.length; i++) {
@@ -439,12 +446,12 @@ $.fn.ImgWheel = function(options) {
     function counterclockwise_init() {
       counterclockwise_timeout = setTimeout(function(){
         counterclockwise();
-      }, 200);
+      }, 300);
     }
     function clockwise_init() {
       clockwise_timeout = setTimeout(function(){
         clockwise();
-      }, 200);
+      }, 300);
     }
 
     // Define functions allowing for variable animation speed during mouseover based on mouse position within
@@ -505,15 +512,8 @@ $.fn.ImgWheel = function(options) {
       }, animateInterval);
     }
 
-    // Display arrows on hover and deploy scrolling functions on click if click functionality enabled.
+    // Deploy scrolling functions on click if click functionality enabled.
     if (settings.functionality === 'click') {
-      $container.hover(
-        function() {
-          $left_arrow.add($right_arrow).fadeIn(100);
-        }, function() {
-          $left_arrow.add($right_arrow).fadeOut(100);
-        }
-      );
       $left_arrow.one('click', left_click_handler);
       $right_arrow.one('click', right_click_handler);
     } else {
