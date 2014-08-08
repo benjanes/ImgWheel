@@ -193,14 +193,14 @@ td {
 	vertical-align: text-top;
 }
 
-#example8 .everythingBut {
+#example10 .everythingBut {
 	opacity: .6;
 	-webkit-filter: invert(100%);
 	-moz-filter: invert(100%);
 	filter: invert(100%);
 }
 
-#example8 .onlyCentral {
+#example10 .onlyCentral {
 	border: 1px solid black;
 }
 
