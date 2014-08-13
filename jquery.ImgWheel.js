@@ -33,11 +33,6 @@ $.fn.ImgWheel = function(options) {
         images = $image.length,
         $article = $articles.find('article');
 
-	// Workaround for fixing 'load' issues in IE-- resets src attr
-	$image.each(function () {
-		$(this).attr('src', $(this).attr('src'));
-	});
-	
     // Add divs for triggering animations
     $container.append('<div class="left-ImgWheel-scroll"></div><div class="right-ImgWheel-scroll"></div>');
     var $left = $container.children('.left-ImgWheel-scroll'),
@@ -228,6 +223,7 @@ $.fn.ImgWheel = function(options) {
         href = '';
       }
       img_href.push(href);
+      $(this).attr('src', $(this).attr('src')); // Workaround for fixing 'load' issues in IE-- resets src attr
     });
     if (img_href[a] !== '') {
       $image.eq(a).wrap('<a href="' + img_href[a] + '"></a>');
