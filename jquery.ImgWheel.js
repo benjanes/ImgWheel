@@ -26,15 +26,18 @@ $.fn.ImgWheel = function(options) {
 
   return this.each( function() {
     var $display = $(this);
-    $display.css({
-      position: 'relative',
-    });
+    $display.css('position', 'relative');
     var $container = $(this).children('.image-container'),
         $articles = $(this).children('.article-container'),
         $image = $container.find('img'),
         images = $image.length,
         $article = $articles.find('article');
 
+	// Workaround for fixing 'load' issues in IE-- resets src attr
+	$image.each(function () {
+		$(this).attr('src', $(this).attr('src'));
+	});
+	
     // Add divs for triggering animations
     $container.append('<div class="left-ImgWheel-scroll"></div><div class="right-ImgWheel-scroll"></div>');
     var $left = $container.children('.left-ImgWheel-scroll'),
@@ -107,7 +110,7 @@ $.fn.ImgWheel = function(options) {
     $container.css({
       width: w+'px',
       height: (w/4)+'px',
-      position: 'relative',
+      position: 'relative'
     });
 
     // Set h and remove 'px'. h is effectively set relative to w.
@@ -238,7 +241,7 @@ $.fn.ImgWheel = function(options) {
 
     // Calculate original aspect ratio of each image and calculate width relative to the given value of h.
     // Establish initial placement of images within the display container.
-    $image.load( function(){
+    $image.load(function () {
       img_fullwidth = [];
       aspectratio = [];
       $image.each(function(){
@@ -248,7 +251,7 @@ $.fn.ImgWheel = function(options) {
             imageHeight = nativeCopy.height;
         aspectratio.push(imageWidth/imageHeight);
       });
-      for(var i = 0; i < $image.length; i++) {
+      for(var i = 0; i < images; i++) {
         img_fullwidth.push(aspectratio[i]*h);
       }
       $image.css({
@@ -278,11 +281,9 @@ $.fn.ImgWheel = function(options) {
       });
       $image.not($image.eq(a)).addClass('everythingBut');
       $article.eq(a).show();
-      $(window).load(function(){
-        $image.show();
-      });
+      $image.show();
     });
-
+	
     // Definition for counterclockwise scrolling (to the right)
     function counterclockwise() {
       if (img_href[a] !== '') {
