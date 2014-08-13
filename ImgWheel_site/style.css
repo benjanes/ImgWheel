@@ -47,12 +47,7 @@ html, body {
 	position: absolute;
 	font-size: 2em;
 	left: 4px;
-	top: -25px;
-}
-
-.page-title h1 {
-	margin: 0;
-	padding: 0;
+	top: -15px;
 }
 
 .main-cats {
