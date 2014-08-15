@@ -450,6 +450,9 @@ pre {
 header.site-header {
   position: static; }
 
+nav.site-nav {
+  z-index: 100; }
+
 .post {
   position: relative; }
 
