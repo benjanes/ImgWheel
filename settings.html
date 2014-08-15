@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Settings</title>
+    <meta name="description" content="ImgWheel is a jQuery plugin for creating an animated display of a list of images with accompanying related information, like articles, blog post descriptions, or  photo captions.
+">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="canonical" href="http://www.benjanes.com/ImgWheel/settings.html">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+    <script src="assets/jquery.ImgWheel.min.js"></script>
+    <script src="assets/main.js"></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/ImgWheel/">ImgWheel: a jQuery Plugin</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/ImgWheel/demos.html">Demos</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/ImgWheel/overview.html">Overview</a>
+          
+        
+          
+          <a class="page-link" href="/ImgWheel/settings.html">Settings</a>
+          
+        
+        <a class="page-link" href="https://github.com/benjanes/ImgWheel">Download</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <aside id="sidebar-nav">
+    <h1 class="post-title">Settings</h1>
+    <ul class="sub-nav">
+    	
+    	<li>
+      		<a href="#options">Options</a>
+    	</li>
+      
+  		
+    	<li>
+      		<a href="#css">Built-in Classes</a>
+    	</li>
+      
+  		
+  	</ul>
+  </aside>
+
+  <article class="post-content">
+    <div id="main">
+	<div id="options">
+		<h2 class="group-title">Options</h2>
+		<div class="content-block">
+			<p>To see what the various settings look like when manipulated, check out the Demos section.</p>
+			<h4 class="option-title">displayWidth</h4>
+			<table>
+				<tr>
+					<th>Description</th>
+					<td>This is the width of the entire ImgWheel display, which includes the slideshow and any other related content below the slideshow but within the targeted &#60;div&#62;. Relative sizing allows for responsiveness, whereas switching to a fixed width (in px) will negate this functionality.</td>
+				</tr>
+				<tr>
+					<th>Options</th>
+					<td>Any display width can be used.</td>
+				</tr>
+				<tr>
+					<th>Default</th>
+					<td>100%</td>
+				</tr>
+			</table>
+
+			<h4 class="option-title">animateSpeedMax</h4>
+			<table>
+				<tr>
+					<th>Description</th>
+					<td>The fastest speed (shortest length of time) of the animated transition from one image to the next. Animation speed is equal to animateSpeedMax when the user's mouse is at the far end of the image container. Speed is in milliseconds.</td>
+				</tr>
+				<tr>
+					<th>Options</th>
+					<td>Any animation speed can be specified. Should be a value less than or equal to animateSpeedMin.</td>
+				</tr>
+				<tr>
+					<th>Default</th>
+					<td>500</td>
+				</tr>
+			</table>
+
+			<h4 class="option-title">animateSpeedMin</h4>
+			<table>
+				<tr>
+					<th>Description</th>
+					<td>The slowest speed (longest length of time) of the animated transition from one image to the next. Animation speed is equal to animateSpeedMin when the user's mouse triggers is closest to the center of the image container. Speed is in milliseconds.</td>
+				</tr>
+				<tr>
+					<th>Options</th>
+					<td>Any animation speed can be specified. Should be a value less than or equal to animateSpeedMax.</td>
+				</tr>
+				<tr>
+					<th>Default</th>
+					<td>2000</td>
+				</tr>
+			</table>			
+
+			<h4 class="option-title">delayMax</h4>
+			<table>
+				<tr>
+					<th>Description</th>
+					<td>The duration that each image (and the related content) is displayed while the ImgWheel is in motion, i.e. being hovered over. This essentially sets the pause of the central image before it is animated to the next slot in the display when the animation is moving at its highest rate of speed. The pause is the difference between delayMax and animateSpeedMax. For instance, if delayMax is set to 800 and animateSpeedMax is set to 500, the pause on the central image during hovering will be 300 milliseconds when the user's cursor is at an extreme end of the image container. If the 'click' functionality is enabled (see below), this setting is irrelevant.</td>
+				</tr>
+				<tr>
+					<th>Options</th>
+					<td>Any animation delay time can be specified. <strong>Must be greater than or equal to animateSpeedMax.</strong></td>
+				</tr>
+				<tr>
+					<th>Default</th>
+					<td>500</td>
+				</tr>
+			</table>
+
+			<h4 class="option-title">delayMin</h4>
+			<table>
+				<tr>
+					<th>Description</th>
+					<td>The duration that each image (and the related content) is displayed while the ImgWheel is in motion, i.e. being hovered over. This essentially sets the pause of the central image before it is animated to the next slot in the display when the animation is moving at its lowest speed. The pause is the difference between delayMin and animateSpeedMin. For instance, if delayMin is set to 2200 and animateSpeedMin is set to 2000, the pause on the central image during hovering will be 200 milliseconds when the user's cursor is near the center of the image container. If the 'click' functionality is enabled (see below), this setting is irrelevant.</td>
+				</tr>
+				<tr>
+					<th>Options</th>
+					<td>Any animation delay time can be specified. <strong>Must be greater than or equal to animateSpeedMin.</strong></td>
+				</tr>
+				<tr>
+					<th>Default</th>
+					<td>2000</td>
+				</tr>
+			</table>
+
+			<h4 class="option-title">imgPlacement</h4>
+			<table>
+				<tr>
+					<th>Description</th>
+					<td>The vertical alignment of the images included in the slideshow display.</td>
+				</tr>
+				<tr>
+					<th>Options</th>
+					<td>'center', 'top', or 'bottom'</td>
+				</tr>
+				<tr>
+					<th>Default</th>
+					<td>'center'</td>
+				</tr>
+			</table>
+
+			<h4 class="option-title">direction</h4>
+			<table>
+				<tr>
+					<th>Description</th>
+					<td>Controls the direction that the images will animate in. By default, images move to the right when hovering or clicking on the left side of the display. Using 'reverse' will cause images to move to the left when hovering or clicking on the left side of the display.</td>
+				</tr>
+				<tr>
+					<th>Options</th>
+					<td>'' or 'reverse'</td>
+				</tr>
+				<tr>
+					<th>Default</th>
+					<td>''</td>
+				</tr>
+			</table>
+			
+			<h4 class="option-title">functionality</h4>
+			<table>
+				<tr>
+					<th>Description</th>
+					<td>The slideshow animation is triggered by hover or touch (when available) by default. Switching to 'click' causes directional arrows to appear when hovering over the display... clicking these arrows triggers one step of the slideshow scrolling. The speed of the transition animation when click is enabled is set using animateSpeedMax, so is 500 milliseconds by default.</td>
+				</tr>
+				<tr>
+					<th>Options</th>
+					<td>'' or 'click'</td>
+				</tr>
+				<tr>
+					<th>Default</th>
+					<td>''</td>
+				</tr>
+			</table>
+
+			<h4 class="option-title">articleWidth</h4>
+			<table>
+				<tr>
+					<th>Description</th>
+					<td>This is the width of associated article display. It is set relative to the displayWidth. For example, if displayWidth is set to 70% and articleWidth is set to 50%, the article width will be 50% of the display width and 35% of the parent container width. This width is responsive. Again, specifying a fixed width negates this responsiveness.</td>
+				</tr>
+				<tr>
+					<th>Options</th>
+					<td>Any article width can be specified.</td>
+				</tr>
+				<tr>
+					<th>Default</th>
+					<td>100%</td>
+				</tr>
+			</table>		
+
+			<h4 class="option-title">articleAlignment</h4>
+			<table>
+				<tr>
+					<th>Description</th>
+					<td>The articles in the .article-container &#60;div&#62; are centered by default, regardless of their specified width. They can also be aligned to the left or right of the container.</td>
+				</tr>
+				<tr>
+					<th>Options</th>
+					<td>'center', 'left', or 'right'</td>
+				</tr>
+				<tr>
+					<th>Default</th>
+					<td>'center'</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+	<div id="css">
+		<h2 class="group-title">Using the Built-in Classes</h2>
+		<div class="content-block">
+			<p>ImgWheel comes with two built in CSS classes. These two classes are added and removed as part of the scrolling function. They allow you to manipulate how the central image and the other images in the slideshow look.</p>
+			<h3>.onlyCentral</h3>
+			<p>The .onlyCentral class is applied to the central image in the slideshow display. You might want to add a border or filter to this center image. Style away in your CSS!</p>
+			<h3>.everythingBut</h3>
+			<p>The .everythingBut class is applied to every image in the slideshow display <i>except for</i> the central image. Maybe you want these other images to be blurred, have limited opacity, or be in black and white. Apply whatever style you want to this class in your CSS file.</p>
+			<p>This is the ImgWheel plugin in it's most basic implementation. Scrolling is 	controlled by hovering 	over either side of the image display. The width of the display is set to 100% by default. The 	display and image sizes are responsive. If images included in the .image-container div are enclosed in an anchor tag, that link will only be active when an image is in the central position.</p>
+		</div>
+	</div>
+</div>
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">ImgWheel: a jQuery Plugin</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li><a href="mailto:ben@benjanes.com">ben@benjanes.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/benjanes">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">benjanes</span>
+            </a>
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">ImgWheel is a jQuery plugin for creating an animated display of a list of images with accompanying related information, like articles, blog post descriptions, or  photo captions.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
